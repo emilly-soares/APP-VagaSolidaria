@@ -1,46 +1,66 @@
-# Getting Started with Create React App
+## 🌟 VagaSolidária
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Logo](https://github.com/emilly-soares/API-VagaSolidaria/assets/54116441/6f94f003-bdca-458e-830a-bfb441cac93d)
 
-## Available Scripts
+## 🚧 🚀 Em construção ... 🚧
 
-In the project directory, you can run:
+### Descrição
+O VagaSolidária é uma aplicação em construção que tem como objetivo facilitar a divulgação de vagas para trabalho voluntário na cidade de Nova Andradina - MS. 
+Esta plataforma visa conectar organizações e instituições que precisam de voluntários com pessoas dispostas a ajudar e contribuir para a comunidade.
 
-### `npm start`
+⚠️ Atenção: Este projeto ainda está em desenvolvimento e pode não estar pronto para uso.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Índice
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- [Instalação](#instalação)
+- [Contribuição](#contribuição)
+- [Licença](#licença)
 
-### `npm test`
+## Instalação
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Para instalar e executar o projeto, siga estas etapas:
 
-### `npm run build`
+1. Certifique-se de ter o Node.js instalado em sua máquina. Você pode baixá-lo e instalá-lo a partir do [site oficial do Node.js](https://nodejs.org/).
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. Clone este repositório em sua máquina local:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+    ```bash
+    git clone https://github.com/emilly-soares/APP-VagaSolidaria.git
+    ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. Navegue até o diretório do projeto:
 
-### `npm run eject`
+    ```bash
+    cd APP-VagaSolidaria
+    ```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+4. Instale as dependências do projeto usando o npm. No terminal, execute o seguinte comando:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+    ```bash
+    npm install
+    ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+5. Após a conclusão da instalação das dependências, você pode iniciar o servidor localmente. Use o seguinte comando:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+    ```bash
+    npm start
+    ```
 
-## Learn More
+6. O servidor será iniciado e estará disponível em `http://localhost:3000`. Você pode acessar este endereço no seu navegador para interagir com a API.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Lembre-se de configurar corretamente as variáveis de ambiente, como as credenciais do banco de dados, antes de iniciar o servidor em ambiente de produção.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Tecnologias Utilizadas
+- 🚀 **React.js**
+- 📦 **Axios**
+- 🌐 **React Router Dom**
+- 💼 **TypeScript**
+- 📊 **Web Vitals**
+
+## Contribuição
+
+🤝 Contribuições são bem-vindas! Sinta-se à vontade para abrir uma issue ou enviar um pull request com melhorias ou correções.
+
+### Autor
+📝 Feito por Emilly Soares 👋🏽
