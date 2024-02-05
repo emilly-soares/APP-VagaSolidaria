@@ -15,7 +15,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
     e.preventDefault();
 
     try {
-      const response = await api.post('/authenticate', {
+      const response = await api.post('/userAuthentication', {
         email,
         password
       });
