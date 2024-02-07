@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import UserForm from '../components/UserForm';
+import VacancyForm from './../components/VacancyForm';
 
 const Vacancy: React.FC = () => {
     const [message, setMessage] = useState<string | null>(null);
@@ -12,7 +12,7 @@ const Vacancy: React.FC = () => {
         <div>
             <h1>Cadastro de Vagas</h1>
             {message && <p>{message}</p>}
-            <UserForm onSuccess={handleVacancyCreationSuccess} />
+            <VacancyForm onSuccess={handleVacancyCreationSuccess} />
         </div>
     );
 };
