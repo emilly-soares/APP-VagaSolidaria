@@ -45,7 +45,6 @@ const UserForm: React.FC<UserFormProps> = ({ onSuccess }) => {
         Admin:
         <input type="checkbox" checked={isAdmin} onChange={(e) => setIsAdmin(e.target.checked)} />
       </label>*/}
-
       <br />
       <button type="submit">Cadastrar Usuário</button>
     </form>

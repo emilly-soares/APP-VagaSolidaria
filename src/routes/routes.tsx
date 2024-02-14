@@ -4,6 +4,7 @@ import User from '../pages/User';
 import Login from '../pages/Login';
 import Company from '../pages/Company';
 import Vacancy from '../pages/Vacancy';
+import HomePage from '../pages/HomePage';
 
 const Router: React.FC = () => {
     return (
@@ -20,8 +21,11 @@ const Router: React.FC = () => {
             <Routes>
                 <Route path="/vacancy" element={<Vacancy />} />
             </Routes>
+            <Routes>
+                <Route path="/home" element={<HomePage />} />
+            </Routes>
         </BrowserRouter>
     );
 };
-
+;
 export default Router;
