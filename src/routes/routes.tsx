@@ -10,7 +10,7 @@ const Router: React.FC = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<User />} />
+                <Route path="/" element={<HomePage />} />
             </Routes>
             <Routes>
                 <Route path="/login" element={<Login />} />
@@ -22,7 +22,7 @@ const Router: React.FC = () => {
                 <Route path="/vacancy" element={<Vacancy />} />
             </Routes>
             <Routes>
-                <Route path="/home" element={<HomePage />} />
+                <Route path="/register" element={<User />} />
             </Routes>
         </BrowserRouter>
     );

@@ -1,29 +1,68 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const Section = styled.section`
+  background-color: #ffffff;
+  color: #333333;
+  padding: 3rem 0;
+`;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const Title = styled.h2`
+  font-size: 2rem;
+  font-weight: bold;
+  color: #fbbf24;
+  margin-bottom: 1.5rem;
+`;
+
+const SocialIcons = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+
+  & > a {
+    color: #333333;
+    margin-right: 1.5rem;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: #fbbf24;
+    }
+  }
+`;
+
+const Button = styled.button`
+  background-color: #fbbf24;
+  color: #333333;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #ffd43b;
+  }
+`;
 
 const SocialSection: React.FC = () => {
   return (
-    <section className="bg-gray-800 text-white py-12">
-      <div className="container mx-auto flex flex-col items-center">
-        <h2 className="text-3xl font-bold mb-6">Compartilhe suas Conquistas</h2>
-        <div className="flex space-x-6">
-          <a href="#" className="text-white">
-            <i className="fab fa-linkedin-in text-3xl"></i>
-          </a>
-          <a href="#" className="text-white">
-            <i className="far fa-envelope text-3xl"></i>
-          </a>
-          <a href="#" className="text-white">
-            <i className="fab fa-whatsapp text-3xl"></i>
-          </a>
-          <a href="#" className="text-white">
-            <i className="fab fa-google-drive text-3xl"></i>
-          </a>
-        </div>
-        <button className="bg-yellow-500 text-gray-800 mt-8 px-6 py-3 rounded-full">
-          Cadastre-se
-        </button>
-      </div>
-    </section>
+    <Section>
+      <Container>
+        <Title>Compartilhe suas Conquistas</Title>
+        <SocialIcons>
+       
+        </SocialIcons>
+        <Button>Cadastre-se</Button>
+      </Container>
+    </Section>
   );
 };
 
