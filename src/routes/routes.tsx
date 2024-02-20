@@ -11,21 +11,13 @@ const Router: React.FC = () => {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<HomePage />} />
-            </Routes>
-            <Routes>
                 <Route path="/login" element={<Login />} />
-            </Routes>
-            <Routes>
                 <Route path="/company" element={<Company />} />
-            </Routes>
-            <Routes>
                 <Route path="/vacancy" element={<Vacancy />} />
-            </Routes>
-            <Routes>
                 <Route path="/register" element={<User />} />
             </Routes>
         </BrowserRouter>
     );
 };
-;
+
 export default Router;

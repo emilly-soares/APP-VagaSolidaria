@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { FaLinkedin,FaInstagram, FaWhatsapp } from 'react-icons/fa';
 
 const Section = styled.section`
   background-color: #ffffff;
@@ -16,8 +17,15 @@ const Container = styled.div`
 const Title = styled.h2`
   font-size: 2rem;
   font-weight: bold;
-  color: #fbbf24;
+  color: #565656;
   margin-bottom: 1.5rem;
+`;
+
+const Yellow = styled.span`
+font-size: 2rem;
+font-weight: bold;
+color: #fbbf24;
+margin-bottom: 1.5rem;
 `;
 
 const SocialIcons = styled.div`
@@ -31,7 +39,7 @@ const SocialIcons = styled.div`
     transition: color 0.3s ease;
 
     &:hover {
-      color: #fbbf24;
+      background-color: #ffd43b;
     }
   }
 `;
@@ -41,7 +49,7 @@ const Button = styled.button`
   color: #333333;
   padding: 1rem 2rem;
   border: none;
-  border-radius: 25px;
+  border-radius: 10px;
   font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
@@ -50,15 +58,18 @@ const Button = styled.button`
   &:hover {
     background-color: #ffd43b;
   }
+
 `;
 
 const SocialSection: React.FC = () => {
   return (
     <Section>
       <Container>
-        <Title>Compartilhe suas Conquistas</Title>
+        <Title><Yellow>Compartilhe</Yellow> suas Conquistas</Title>
         <SocialIcons>
-       
+          <FaLinkedin size={50} color="#0e76a8" background-color="#FFFFFF" />
+          <FaInstagram size={50} color="#d6249f" />
+          <FaWhatsapp size={50} color="#075e54" background-color="#075e54" />
         </SocialIcons>
         <Button>Cadastre-se</Button>
       </Container>

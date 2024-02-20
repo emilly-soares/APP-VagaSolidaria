@@ -11,6 +11,11 @@ const GlobalStyle = createGlobalStyle`
         overflow-x: hidden;
     }
 
+    h1, h2, h3, p, div{
+        letter-spacing: 1px;
+        line-height: 1.5;
+    }
+
 `;
 
 export default GlobalStyle;

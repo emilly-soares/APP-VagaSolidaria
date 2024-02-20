@@ -14,6 +14,7 @@ const Home: React.FC = () => {
         <Container>
 
             <Menu>
+
                 <Navbar>
                     <NavbarMenu>
                         <FlexItem>
@@ -56,20 +57,17 @@ const Home: React.FC = () => {
 
             </Menu>
 
-
-
             <BenefitsSection>
                 <Line src={line} alt="linha"></Line>
                 <FirstSection>
                     <Caption>Você encontrará oportunidades para impactar positivamente a comunidade!</Caption>
                     <YellowButton>Cadastre-se</YellowButton>
                 </FirstSection>
-
                 <div className="benefits">
                   <Benefit src={benefit}></Benefit>
                 </div>
             </BenefitsSection>
-
+            
                 <CompanyBenefits src={center} alt="Benefícios para empresas" ></CompanyBenefits>
     
             <RegisterSection src={registerSection}></RegisterSection>
