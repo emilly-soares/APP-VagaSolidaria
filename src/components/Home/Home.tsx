@@ -1,7 +1,7 @@
 import React from 'react';
-import SocialSection from '../SocialSection';
-import Footer from '../Footer';
-import { Container, Navbar, LoginLink, ArrowDown, NavbarMenu, NavbarItem, NavbarButtons, NavbarButton, Menu, HomeTitle, Caption, YellowButton, Comment, BenefitsSection, FirstSection, Benefit, CompanyBenefits, RegisterSection, FlexItem, Logo, PlatformSection, PlatformTitle, PlatformButton, HandWaveEmoji, Line } from './style';
+import SocialSection from '.././SocialSection';
+import Footer from '.././Footer';
+import * as S from './style';
 import logoImg from '../../assets/logo.svg';
 import line from '../../assets/line.svg';
 import comment from '../../assets/comment.png';
@@ -11,70 +11,70 @@ import registerSection from '../../assets/registerSection.svg'
 
 const Home: React.FC = () => {
     return (
-        <Container>
+        <S.Container>
 
-            <Menu>
-
-                <Navbar>
-                    <NavbarMenu>
-                        <FlexItem>
-                            <NavbarItem to="/opportunities">Oportunidades <ArrowDown>-</ArrowDown></NavbarItem>
-                        </FlexItem>
-                        <FlexItem>
-                            <NavbarItem to="/evaluations">Avaliações <ArrowDown>-</ArrowDown></NavbarItem>
-                        </FlexItem>
-                        <FlexItem>
-                            <NavbarItem to="/employers">Empresas</NavbarItem>
-                        </FlexItem>
-                    </NavbarMenu>
-                    <NavbarButtons>
-                        <LoginLink to="/login">Login</LoginLink>
-                        <NavbarButton to="/register">Cadastre-se</NavbarButton>
-                    </NavbarButtons>
-                </Navbar>
+            <S.Menu>
+                
+                <S.Navbar>
+                    <S.NavbarMenu>
+                        <S.FlexItem>
+                            <S.NavbarItem to="/opportunities">Oportunidades <S.ArrowDown>-</S.ArrowDown></S.NavbarItem>
+                        </S.FlexItem>
+                        <S.FlexItem>
+                            <S.NavbarItem to="/evaluations">Avaliações <S.ArrowDown>-</S.ArrowDown></S.NavbarItem>
+                        </S.FlexItem>
+                        <S.FlexItem>
+                            <S.NavbarItem to="/employers">Empresas</S.NavbarItem>
+                        </S.FlexItem>
+                    </S.NavbarMenu>
+                    <S.NavbarButtons>
+                        <S.LoginLink to="/login">Login</S.LoginLink>
+                        <S.NavbarButton to="/register">Cadastre-se</S.NavbarButton>
+                    </S.NavbarButtons>
+                </S.Navbar>
 
                 <div style={{ position: 'relative' }}>
-                    <Logo src={logoImg} alt="Logo VagaSolidária" />
-                    <PlatformTitle>VagaSolidária</PlatformTitle>
+                    <S.Logo src={logoImg} alt="Logo VagaSolidária" />
+                    <S.PlatformTitle>VagaSolidária</S.PlatformTitle>
                 </div>
 
-                <PlatformSection>
+                <S.PlatformSection>
 
                     <div>
-                        <PlatformButton>
-                            Conheça a Plataforma <HandWaveEmoji role="img" aria-label="hand-wave">👋</HandWaveEmoji>
-                        </PlatformButton>
+                        <S.PlatformButton>
+                            Conheça a Plataforma <S.HandWaveEmoji role="img" aria-label="hand-wave">👋</S.HandWaveEmoji>
+                        </S.PlatformButton>
                     </div>
                     <div>
-                        <HomeTitle>Unindo Voluntários e Oportunidades Solidárias</HomeTitle>
-                        <Caption>VagaSolidária é uma plataforma online que reúne voluntários e organizações para compartilhar oportunidades de trabalho voluntário em projetos sociais</Caption>
-                        <YellowButton>Vagas Disponíveis</YellowButton>
+                        <S.HomeTitle>Unindo Voluntários e Oportunidades Solidárias</S.HomeTitle>
+                        <S.Caption>VagaSolidária é uma plataforma online que reúne voluntários e organizações para compartilhar oportunidades de trabalho voluntário em projetos sociais</S.Caption>
+                        <S.YellowButton>Vagas Disponíveis</S.YellowButton>
                     </div>
                     <div className="reviews">
-                        <Comment src={comment} alt="comentários" ></Comment>
+                        <S.Comment src={comment} alt="comentários" ></S.Comment>
                     </div>
-                </PlatformSection>
+                </S.PlatformSection>
 
-            </Menu>
+            </S.Menu>
 
-            <BenefitsSection>
-                <Line src={line} alt="linha"></Line>
-                <FirstSection>
-                    <Caption>Você encontrará oportunidades para impactar positivamente a comunidade!</Caption>
-                    <YellowButton>Cadastre-se</YellowButton>
-                </FirstSection>
+            <S.BenefitsSection>
+                <S.Line src={line} alt="linha"></S.Line>
+                <S.FirstSection>
+                    <S.Caption>Você encontrará oportunidades para impactar positivamente a comunidade!</S.Caption>
+                    <S.YellowButton>Cadastre-se</S.YellowButton>
+                </S.FirstSection>
                 <div className="benefits">
-                  <Benefit src={benefit}></Benefit>
+                    <S.Benefit src={benefit}></S.Benefit>
                 </div>
-            </BenefitsSection>
-            
-                <CompanyBenefits src={center} alt="Benefícios para empresas" ></CompanyBenefits>
-    
-            <RegisterSection src={registerSection}></RegisterSection>
-  
+            </S.BenefitsSection>
+
+            <S.CompanyBenefits src={center} alt="Benefícios para empresas" ></S.CompanyBenefits>
+
+            <S.RegisterSection src={registerSection}></S.RegisterSection>
+
             <SocialSection />
             <Footer />
-        </Container>
+        </S.Container>
     );
 };
 

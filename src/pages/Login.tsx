@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import LoginForm from '../components/LoginForm';
+import LoginForm from '../components/Login/LoginForm';
 
 const Login: React.FC = () => {
   const [message, setMessage] = useState<string | null>(null);
@@ -10,7 +10,6 @@ const Login: React.FC = () => {
 
   return (
     <div>
-      <h1>Login</h1>
       {message && <p>{message}</p>}
       <LoginForm onSuccess={handleUserLoginSuccess} />
     </div>

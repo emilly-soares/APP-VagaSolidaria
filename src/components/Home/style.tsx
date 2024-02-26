@@ -46,7 +46,7 @@ export const NavbarButtons = styled.div`
 export const NavbarButton = styled(Link)`
     color: #2C2C2C;
     text-decoration: none;
-    background-color: #FFCA1D; 
+    background-color: #FFCA1D; /* Amarelo */
     font-weight: bold;
     padding: 0.5rem 1rem;
     border-radius: 5px;
