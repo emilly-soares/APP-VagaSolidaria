@@ -1,16 +1,22 @@
 import React, { useState } from 'react';
-import LoginForm from '../components/Login/LoginForm';
+import LoginForm from '../components/Login';
+import {useNavigate } from 'react-router-dom';
 
 const Login: React.FC = () => {
-  const [message, setMessage] = useState<string | null>(null);
+  const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleUserLoginSuccess = () => {
-    setMessage('Login efetuado com sucesso!');
+    setIsLoggedIn(true);
   };
+
+  if (isLoggedIn) {
+    navigate('/');
+    return null;
+  }
 
   return (
     <div>
-      {message && <p>{message}</p>}
       <LoginForm onSuccess={handleUserLoginSuccess} />
     </div>
   );

@@ -33,7 +33,6 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
       setEmail('');
       setPassword('');
       setError('');
-
       onSuccess();
 
     } catch (error: any) {
@@ -49,7 +48,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
     <S.Container>
 
       <S.LeftSection>
-        <S.GroupLogo  to="/" >
+        <S.GroupLogo to="/" >
           <S.Logo src={logoImg} alt="Logo VagaSolidária" />
           <S.PlatformTitle>VagaSolidária</S.PlatformTitle>
         </S.GroupLogo>
@@ -63,22 +62,27 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
 
       <S.RightSection>
         <S.LoginFormContainer onSubmit={handleSubmit}>
+
           <S.Title>Login</S.Title>
+
           <S.InputLabel >Email:</S.InputLabel>
           <S.Input placeholder="insira seu e-mail" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+
           <S.InputLabel>Password:</S.InputLabel>
           <S.InputContainer>
             <S.Input
               placeholder="insira sua senha"
-              type={showPassword ? 'text' : 'password'} 
+              type={showPassword ? 'text' : 'password'}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
             <S.TogglePasswordVisibility onClick={() => setShowPassword(!showPassword)}>
-              {showPassword ? <FiEyeOff /> : <FiEye />} 
+              {showPassword ? <FiEyeOff /> : <FiEye />}
             </S.TogglePasswordVisibility>
+
           </S.InputContainer>
+
           {error && <S.Error>{error}</S.Error>}
           <S.SubmitButton type="submit">Acessar</S.SubmitButton>
         </S.LoginFormContainer>

@@ -140,16 +140,18 @@ export const Menu = styled.div`
     height: 700px; 
 `;
 
-export const YellowButton = styled.button`
+export const YellowButton = styled(Link)`
     background-color: #FFCA1D; /* Amarelo */
+    text-decoration: none;
     font-weight: bold;
     padding: 0.5rem 1rem;
     border-radius: 5px;
+    font-weight: bold;
+    border-radius: 5px;
     color: #2C2C2C;
-    border: none;
     cursor: pointer;
     font-size: 16px;
-    height: 45px;
+    height: 50px;
     margin-top: 1rem;
     &:hover {
         background-color: #FFD43B;

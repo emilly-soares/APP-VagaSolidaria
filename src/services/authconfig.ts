@@ -2,7 +2,7 @@ import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
 
 export const TOKEN_KEY = '@VAGASOLIDARIA/token';
-export const USER = '@VAGASOLIDARIA:user';
+export const USER = '@VAGASOLIDARIA/user';
 
 export const isAuthenticated = (): boolean => Cookies.get(TOKEN_KEY) !== undefined;
 
@@ -33,6 +33,14 @@ export const getUserId = (): string | undefined => {
   if (userString) {
     const user = JSON.parse(userString);
     return user._id;
+  }
+  return undefined;
+};
+
+export const getUser = (): any => {
+  const userString = Cookies.get(USER);
+  if (userString) {
+    return JSON.parse(userString);
   }
   return undefined;
 };

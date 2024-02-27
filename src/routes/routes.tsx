@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
-import User from '../pages/User';
+import Register from '../pages/Register';
 import Login from '../pages/Login';
 import Company from '../pages/Company';
 import Vacancy from '../pages/Vacancy';
@@ -14,7 +14,7 @@ const Router: React.FC = () => {
                 <Route path="/login" element={<Login />} />
                 <Route path="/company" element={<Company />} />
                 <Route path="/vacancy" element={<Vacancy />} />
-                <Route path="/register" element={<User />} />
+                <Route path="/register" element={<Register />} />
             </Routes>
         </BrowserRouter>
     );
