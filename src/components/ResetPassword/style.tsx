@@ -63,7 +63,7 @@ export const ButtonRegister = styled(Link)`
   align-items: center;
 `;
 
-export const ResetPassword = styled(Link)`
+export const Login = styled(Link)`
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
   text-decoration: none;

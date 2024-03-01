@@ -5,6 +5,7 @@ import Login from '../pages/Login';
 import Company from '../pages/Company';
 import Vacancy from '../pages/Vacancy';
 import HomePage from '../pages/HomePage';
+import ResetPassword from '../pages/ResetPassword';
 
 const Router: React.FC = () => {
     return (
@@ -15,6 +16,7 @@ const Router: React.FC = () => {
                 <Route path="/company" element={<Company />} />
                 <Route path="/vacancy" element={<Vacancy />} />
                 <Route path="/register" element={<Register />} />
+                <Route path="/resetPassword" element={<ResetPassword />} />
             </Routes>
         </BrowserRouter>
     );

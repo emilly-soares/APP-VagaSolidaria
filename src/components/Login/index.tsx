@@ -80,9 +80,8 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
             <S.TogglePasswordVisibility onClick={() => setShowPassword(!showPassword)}>
               {showPassword ? <FiEyeOff /> : <FiEye />}
             </S.TogglePasswordVisibility>
-
           </S.InputContainer>
-
+          <S.ResetPassword to="/resetPassword">Esqueceu a Senha?</S.ResetPassword>
           {error && <S.Error>{error}</S.Error>}
           <S.SubmitButton type="submit">Acessar</S.SubmitButton>
         </S.LoginFormContainer>
