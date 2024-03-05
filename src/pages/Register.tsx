@@ -4,10 +4,10 @@ import { useNavigate } from 'react-router-dom';
 
 const Register: React.FC = () => {
   const navigate = useNavigate();
-  const [isRegistered, setIiRegistered] = useState(false);
+  const [isRegistered, setIsRegistered] = useState(false);
 
   const handleUserRegisterSuccess = () => {
-    setIiRegistered(true);
+    setIsRegistered(true);
   };
 
   if (isRegistered) {

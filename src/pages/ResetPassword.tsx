@@ -1,15 +1,20 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ResetPasswordForm from '../components/ResetPassword/index';
-import { ToastContainer, toast } from "react-toastify";
 
 const ResetPassword: React.FC = () => {
+
   const navigate = useNavigate();
+  const [isReset, setIsReset] = useState(false);
 
   const handleUpdatePassword = () => {
-    toast.success("Sucesso");
-    navigate('/updatePassword');
+    setIsReset(true);
   };
+
+  if(isReset){
+    navigate('/updatePassword');
+    return null;
+  }
 
   return (
     <div>

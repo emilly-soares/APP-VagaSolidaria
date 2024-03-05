@@ -6,6 +6,7 @@ import Company from '../pages/Company';
 import Vacancy from '../pages/Vacancy';
 import HomePage from '../pages/HomePage';
 import ResetPassword from '../pages/ResetPassword';
+import UpdatePassword from '../pages/UpdatePassword';
 
 const Router: React.FC = () => {
     return (
@@ -17,6 +18,7 @@ const Router: React.FC = () => {
                 <Route path="/vacancy" element={<Vacancy />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/resetPassword" element={<ResetPassword />} />
+                <Route path="/updatePassword" element={<UpdatePassword />} />
             </Routes>
         </BrowserRouter>
     );
