@@ -2,7 +2,7 @@ import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
 
 export const TOKEN_KEY = '@VAGASOLIDARIA/token';
-export const USER = '@VAGASOLIDARIA/user';
+export const USER_ID = '@VAGASOLIDARIA/user';
 
 export const isAuthenticated = (): boolean => Cookies.get(TOKEN_KEY) !== undefined;
 
@@ -10,7 +10,7 @@ export const getToken = (): string | undefined => Cookies.get(TOKEN_KEY);
 
 export const login = (token: string, user: any): void => {
   Cookies.set(TOKEN_KEY, token, { expires: 1, secure: true, sameSite: 'strict' });
-  Cookies.set(USER, JSON.stringify(user), { expires: 1, secure: true, sameSite: 'strict' });
+  Cookies.set(USER_ID, JSON.stringify(user), { expires: 1, secure: true, sameSite: 'strict' });
 };
 
 export const isTokenExpired = (): boolean => {
@@ -29,16 +29,18 @@ export const isTokenExpired = (): boolean => {
 };
 
 export const getUserId = (): string | undefined => {
-  const userString = Cookies.get(USER);
+  const userString = Cookies.get(USER_ID);
   if (userString) {
     const user = JSON.parse(userString);
-    return user._id;
+    if (user && user._id) {
+      return user._id;
+    }
   }
   return undefined;
 };
 
 export const getUser = (): any => {
-  const userString = Cookies.get(USER);
+  const userString = Cookies.get(USER_ID);
   if (userString) {
     return JSON.parse(userString);
   }
@@ -47,5 +49,5 @@ export const getUser = (): any => {
 
 export const logout = (): void => {
   Cookies.remove(TOKEN_KEY);
-  Cookies.remove(USER);
+  Cookies.remove(USER_ID);
 };
