@@ -28,7 +28,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
       const { token, user } = response.data;
 
       Cookies.set('token', token, { expires: 1 });
-      Cookies.set('user', JSON.stringify(user), { expires: 1 })
+      Cookies.set('user', user, { expires: 1 })
 
       setEmail('');
       setPassword('');

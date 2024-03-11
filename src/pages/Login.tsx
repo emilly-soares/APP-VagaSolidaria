@@ -7,17 +7,18 @@ import { getUserId } from '../services/authconfig';
 const Login: React.FC = () => {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const userId = getUserId();
+ 
 
   useEffect(() => {
+    const userId = getUserId();
     if (isLoggedIn) {
       api.get(`/user/${userId}/isAdmin`)
         .then(response => {
           const isAdmin = response.data.isAdmin;
-          if (isAdmin) {
+          if (isAdmin==='true') {
             navigate('/company');
           } else if (userId) {
-            navigate('/private');
+            navigate('/');
           } else {
             navigate('/');
             console.log(isAdmin, userId);
@@ -27,7 +28,7 @@ const Login: React.FC = () => {
           console.error('Erro ao verificar se o usuário é administrador:', error);
         });
     }
-  }, [isLoggedIn, navigate, userId]);
+  }, [isLoggedIn, navigate]);
 
   const handleUserLoginSuccess = () => {
     setIsLoggedIn(true);

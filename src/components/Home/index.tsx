@@ -9,7 +9,7 @@ import benefit from '../../assets/benefit.svg';
 import center from '../../assets/center.svg';
 import registerSection from '../../assets/registerSection.svg'
 import { useNavigate } from 'react-router-dom';
-import { logout, isAuthenticated, getUser } from '../../services/authconfig';
+import { logout, isAuthenticated, getUserId } from '../../services/authconfig';
 
 const Home: React.FC = () => {
     const navigate = useNavigate();
@@ -21,20 +21,13 @@ const Home: React.FC = () => {
             const authenticated = await isAuthenticated();
             if (authenticated) {
                 setIsLoggedIn(true);
-                const user = await getUser();
-                setUserName(user.name);
+                const user = await getUserId();
+                //setUserName(user.name);
             }
         };
         checkAuthentication();
     }, []);
 
-    const handleLoginClick = () => {
-        if (isLoggedIn) {
-            handleLogout();
-        } else {
-            navigate('/login');
-        }
-    };
 
     const handleLogout = () => {
         logout();
