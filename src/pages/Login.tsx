@@ -12,7 +12,7 @@ const Login: React.FC = () => {
   useEffect(() => {
     const userId = getUserId();
     if (isLoggedIn) {
-      api.get(`/user/${userId}/isAdmin`)
+      api.get(`/userAdmin/${userId}`)
         .then(response => {
           const isAdmin = response.data.isAdmin;
           if (isAdmin==='true') {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import CompanyForm from './../components/CompanyForm';
+import CompanyForm from '../components/Home/Company';
 
 const Company: React.FC = () => {
     const [message, setMessage] = useState<string | null>(null);

@@ -6,7 +6,11 @@ export const USER_ID = '@VAGASOLIDARIA/user';
 
 export const isAuthenticated = (): boolean => Cookies.get(TOKEN_KEY) !== undefined;
 
-export const getToken = (): string | undefined => Cookies.get(TOKEN_KEY);
+export const getToken = (): string | undefined => {
+  const token = Cookies.get(TOKEN_KEY);
+  console.log('Token:', token); // Adiciona este console.log para ver o token no console
+  return token;
+};
 
 export const getUserId = (): string | undefined => Cookies.get(USER_ID);
 

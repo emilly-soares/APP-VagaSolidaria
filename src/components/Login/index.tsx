@@ -5,7 +5,7 @@ import * as S from './style';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 import logoImg from '../../assets/logo.svg';
 import vacancyCircle2 from '../../assets/vacancyCircle2.png';
-
+import {TOKEN_KEY, USER_ID} from '../../services/authconfig';
 interface LoginFormProps {
   onSuccess: () => void;
 }
@@ -27,8 +27,8 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
 
       const { token, user } = response.data;
 
-      Cookies.set('token', token, { expires: 1 });
-      Cookies.set('user', user, { expires: 1 })
+      Cookies.set(TOKEN_KEY, token, { expires: 1 });
+      Cookies.set(USER_ID, user, { expires: 1 })
 
       setEmail('');
       setPassword('');
