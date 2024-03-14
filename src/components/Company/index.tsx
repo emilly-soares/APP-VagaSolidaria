@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import api from '../../services/api';
 import * as S from './style';
 import { FaTrashAlt, FaEdit } from 'react-icons/fa';
-
+import CompanyPDF from '../CompanyPDF';
 interface CompanyFormProps {
     onSuccess: () => void;
 }
 
-interface Company {
+export interface Company {
     id: number;
     cnpj: string;
     phone: string;
@@ -17,9 +17,14 @@ interface Company {
     street: string;
     numberStreet: string;
     neighborhood: string;
+    createdAt: string;
+    updatedAt: string;
+
 }
 
 const CompanyForm: React.FC<CompanyFormProps> = ({ onSuccess }) => {
+
+
 
     const [companies, setCompanies] = useState<Company[]>([]);
     const [editingCompanyId, setEditingCompanyId] = useState<number | null>(null);
@@ -134,6 +139,7 @@ const CompanyForm: React.FC<CompanyFormProps> = ({ onSuccess }) => {
                 <S.InputField type="text" name="neighborhood" value={neighborhood} onChange={(e) => setNeighborhood(e.target.value)} placeholder="Bairro" required />
                 {error && <S.Error>{error}</S.Error>}
                 <S.SubmitButton type="submit">{isEditing ? 'Editar Empresa' : 'Cadastrar Empresa'}</S.SubmitButton>
+                <CompanyPDF companies={companies} />
             </S.FormContainer>
 
             <S.CompanyList>

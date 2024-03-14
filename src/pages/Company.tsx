@@ -10,7 +10,6 @@ const Company: React.FC = () => {
 
     return (
         <div>
-            <h1>Gerenciamento de Empresas</h1>
             {message && <p>{message}</p>}
             <CompanyForm onSuccess={handleCompanyCreationSuccess} />
         </div>

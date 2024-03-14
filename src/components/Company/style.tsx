@@ -23,6 +23,7 @@ export const InputField = styled.input`
     font-size: 16px;
 `;
 
+
 export const SubmitButton = styled.button`
     font-size: 16px;
     background-color: #5187F0;
