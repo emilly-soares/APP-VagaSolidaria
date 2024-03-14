@@ -56,6 +56,19 @@ export const NavbarButton = styled(Link)`
       }
 `;
 
+export const Button = styled.button`
+    color: #EEEEEE;
+    font-weight: bold;
+    background-color: transparent; 
+    border: none; 
+    width: 20%;
+    margin-right: 1rem;
+    font-size: inherit; 
+    cursor: pointer; 
+    &:hover {
+    text-decoration: underline;
+    `
+
 export const LoginLink = styled(Link)`
     color: #EEEEEE;
     font-weight: bold;

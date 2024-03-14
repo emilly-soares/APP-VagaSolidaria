@@ -55,7 +55,7 @@ const Home: React.FC = () => {
                     <S.NavbarButtons>
                         {isLoggedIn ? (
                             <>
-                                <button onClick={handleLogout}>Sair</button>
+                                <S.Button onClick={handleLogout}>Sair</S.Button>
                                 <S.NavbarButton to="/manageUser">Alterar Usuário</S.NavbarButton>
                             </>
                         ) : (
