@@ -8,7 +8,7 @@ export const isAuthenticated = (): boolean => Cookies.get(TOKEN_KEY) !== undefin
 
 export const getToken = (): string | undefined => {
   const token = Cookies.get(TOKEN_KEY);
-  console.log('Token:', token); // Adiciona este console.log para ver o token no console
+  console.log('Token:', token); 
   return token;
 };
 

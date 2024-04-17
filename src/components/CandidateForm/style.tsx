@@ -9,6 +9,11 @@ export const Container = styled.div`
     max-width: 1200px;
 `;
 
+export const Label = styled.label`
+    font-size: 14px;
+    color: #333; 
+`;
+
 export const FormContainer = styled.form`
     width: 30%;
     padding: 20px;

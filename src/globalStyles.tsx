@@ -15,6 +15,9 @@ const GlobalStyle = createGlobalStyle`
         letter-spacing: 1px;
         line-height: 1.5;
     }
+    link{
+        cursor: pointer;
+    }
 
 `;
 
