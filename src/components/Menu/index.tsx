@@ -59,11 +59,14 @@ const Navbar: React.FC = () => {
             <S.NavbarButtons>
                 {isLoggedIn ? (
                     <>
-                        <S.LoginLink to="/login">Login</S.LoginLink>
                         <S.Button onClick={toggleSubmenu}>{userName}</S.Button>
                         {isSubmenuOpen && (
                             <S.Submenu>
-                                <S.SubmenuLink to={userRole === 'admin' ? "/manageCompanies" : "/manageUser"}>Meu Perfil</S.SubmenuLink>
+                                {userRole === 'admin' ? (
+                                    <S.SubmenuLink to="/manageCompanies">Gerenciar Empresas</S.SubmenuLink>
+                                ) : (
+                                    <S.SubmenuLink to="/profile">Meu Perfil</S.SubmenuLink>
+                                )}
                                 <S.SubmenuLink to="/resetPassword">Alterar Senha</S.SubmenuLink>
                                 <S.SubmenuButton onClick={handleLogout}>Sair</S.SubmenuButton>
                             </S.Submenu>
@@ -76,7 +79,6 @@ const Navbar: React.FC = () => {
                     </>
                 )}
             </S.NavbarButtons>
-           
         </S.ContainerNavbar>
     );
 };

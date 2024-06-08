@@ -7,7 +7,7 @@ import { getUserId } from '../services/authconfig';
 const Login: React.FC = () => {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
- 
+
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -16,12 +16,11 @@ const Login: React.FC = () => {
         api.get(`/userRole/${userId}`)
           .then(response => {
             const role = response.data.role;
-            console.log(role);
             if (role === 'business') {
-              navigate('/vacancy');
-            } else if (role == 'admin'){
-              navigate('/company');
-            } else if (role == 'candidate'){
+              navigate('/managerVacancies');
+            } else if (role == 'admin') {
+              navigate('/managerCompanies');
+            } else if (role == 'candidate') {
               navigate('/');
             }
           })
