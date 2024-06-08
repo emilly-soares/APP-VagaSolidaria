@@ -7,7 +7,7 @@ import comment from '../../assets/comment.png';
 import benefit from '../../assets/benefit.svg';
 import center from '../../assets/center.svg';
 import registerSection from '../../assets/registerSection.svg'
-import Navbar from '../Menu/Navbar';
+import Navbar from '../Menu';
 
 const Home: React.FC = () => {
 
