@@ -1,13 +1,15 @@
 import React from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
-import Register from '../pages/Register';
+import RegisterUser from '../pages/RegisterUser';
 import Login from '../pages/Login';
-import Company from '../pages/Company';
+import ManageCompanies from '../pages/ManageCompanies';
 import Vacancy from '../pages/Vacancy';
 import HomePage from '../pages/HomePage';
 import ResetPassword from '../pages/ResetPassword';
 import UpdatePassword from '../pages/UpdatePassword';
 import UpdateCandidate from './../pages/UpdateCandidate';
+import CompanyOpportunities from "../pages/CompanyOpportunities"
+import Companies from '../components/Companies';
 
 const Router: React.FC = () => {
     return (
@@ -15,12 +17,14 @@ const Router: React.FC = () => {
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/company" element={<Company />} />
                 <Route path="/vacancy" element={<Vacancy />} />
-                <Route path="/register" element={<Register />} />
+                <Route path="/register" element={<RegisterUser />} />
                 <Route path="/resetPassword" element={<ResetPassword />} />
                 <Route path="/updatePassword" element={<UpdatePassword />} />
                 <Route path="/manageUser" element={<UpdateCandidate />} />
+                <Route path="/opportunities" element={<CompanyOpportunities />} />
+                <Route path="/companies" element={<Companies />} />
+                <Route path="/manageCompanies" element={<ManageCompanies />} />
             </Routes>
         </BrowserRouter>
     );
