@@ -13,13 +13,15 @@ const Login: React.FC = () => {
     if (isLoggedIn) {
       const userId = getUserId();
       if (userId) {
-        api.get(`/userAdmin/${userId}`)
+        api.get(`/userRole/${userId}`)
           .then(response => {
-            const isAdmin = response.data.isAdmin;
-            if (isAdmin === true) {
+            const role = response.data.role;
+            console.log(role);
+            if (role === 'business') {
+              navigate('/vacancy');
+            } else if (role == 'admin'){
               navigate('/company');
-            } else {
-              console.log(isAdmin)
+            } else if (role == 'candidate'){
               navigate('/');
             }
           })
