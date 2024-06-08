@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import UserForm from '../components/Register';
 import { useNavigate } from 'react-router-dom';
 
-const Register: React.FC = () => {
+const RegisterUser: React.FC = () => {
   const navigate = useNavigate();
   const [isRegistered, setIsRegistered] = useState(false);
 
@@ -22,4 +22,4 @@ const Register: React.FC = () => {
   );
 };
 
-export default Register;
+export default RegisterUser;

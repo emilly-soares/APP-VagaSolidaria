@@ -8,7 +8,7 @@ export const isAuthenticated = (): boolean => Cookies.get(TOKEN_KEY) !== undefin
 
 export const getToken = (): string | undefined => {
   const token = Cookies.get(TOKEN_KEY);
-  console.log('Token:', token); 
+  console.log('Token:', token);
   return token;
 };
 
@@ -34,6 +34,18 @@ export const isTokenExpired = (): boolean => {
   }
 };
 
+export const getRoleUser = (): string | undefined => {
+  const token = getToken();
+  if (!token) return undefined;
+
+  try {
+    const decoded: any = jwtDecode(token);
+    return decoded.role; 
+  } catch (err) {
+    console.log('Error decoding token:', err);
+    return undefined;
+  }
+};
 
 export const logout = (): void => {
   Cookies.remove(TOKEN_KEY);
