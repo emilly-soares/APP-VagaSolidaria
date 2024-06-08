@@ -113,4 +113,10 @@ export const CompanyTable = styled.table`
     border-collapse: collapse;
 `;
 
+export const SuccessMessage = styled.p`
+    color: green;
+    font-weight: bold;
+    margin-top: 10px;
+`;
+
 export const CompanyTableBody = styled.tbody``;
