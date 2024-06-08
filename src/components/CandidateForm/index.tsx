@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import * as S from './style';
-import Navbar from '../Menu/Navbar';
+import Navbar from '../Menu';
 import { getUserId } from '../../services/authconfig';
 import api from '../../services/api';
 
@@ -10,6 +10,8 @@ export interface Candidate {
     street: string;
     numberStreet: string;
     neighborhood: string;
+    dateBirth: string; 
+    phone: string;   
 }
 
 export interface User {
@@ -26,7 +28,9 @@ const CandidateForm: React.FC = () => {
         CPF: '',
         street: '',
         numberStreet: '',
-        neighborhood: ''
+        neighborhood: '',
+        dateBirth: '',
+        phone: ''     
     });
 
     const [user, setUser] = useState<User>({
@@ -35,14 +39,25 @@ const CandidateForm: React.FC = () => {
         name: ''
     });
 
+    const [isNewCandidate, setIsNewCandidate] = useState(true);
+    const [successMessage, setSuccessMessage] = useState<string | null>(null); // Estado para a mensagem de sucesso
+
     useEffect(() => {
         async function fetchData() {
             try {
-                const responseCandidate = await api.get(`/candidateFind/${userId}`);
-                setCandidate(responseCandidate.data);
-
                 const responseUser = await api.get(`/user/${userId}`);
                 setUser(responseUser.data);
+
+                const responseCandidate = await api.get(`/candidateFind/${userId}`);
+                if (responseCandidate.data) {
+                    // Formatar a data para o formato YYYY-MM-DD
+                    const candidateData = {
+                        ...responseCandidate.data,
+                        dateBirth: responseCandidate.data.dateBirth ? new Date(responseCandidate.data.dateBirth).toISOString().split('T')[0] : ''
+                    };
+                    setCandidate(candidateData);
+                    setIsNewCandidate(false);
+                }
             } catch (error) {
                 console.error('Erro ao obter candidato ou usuário:', error);
             }
@@ -70,8 +85,12 @@ const CandidateForm: React.FC = () => {
         e.preventDefault();
         try {
             await api.put(`/user/${userId}`, user);
-            await api.put(`/candidate/${userId}`, candidate);
-            console.log('Dados alterados com sucesso!');
+            if (isNewCandidate) {
+                await api.post(`/candidate`, { ...candidate, userId });
+            } else {
+                await api.put(`/candidate/${userId}`, candidate);
+            }
+            setSuccessMessage('Dados cadastrados/alterados com sucesso!');
         } catch (error) {
             console.error('Erro ao alterar dados:', error);
         }
@@ -136,8 +155,26 @@ const CandidateForm: React.FC = () => {
                         placeholder="Bairro"
                         required
                     />
-                    <S.SubmitButton type="submit">Alterar</S.SubmitButton>
+                    <S.Label htmlFor="dateBirth">Data de Nascimento:</S.Label>
+                    <S.InputField
+                        type="date"
+                        name="dateBirth"
+                        value={candidate.dateBirth}
+                        onChange={handleCandidateChange}
+                        required
+                    />
+                    <S.Label htmlFor="phone">Telefone:</S.Label>
+                    <S.InputField
+                        type="tel"
+                        name="phone"
+                        value={candidate.phone}
+                        onChange={handleCandidateChange}
+                        placeholder="Telefone"
+                        required
+                    />
+                    <S.SubmitButton type="submit">Salvar</S.SubmitButton>
                 </S.FormContainer>
+                {successMessage && <S.SuccessMessage>{successMessage}</S.SuccessMessage>}
             </S.Container>
         </>
     );
