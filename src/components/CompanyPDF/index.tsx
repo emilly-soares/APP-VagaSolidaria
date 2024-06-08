@@ -1,7 +1,7 @@
 import React from 'react';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
-import { Company } from '../Company';
+import { Company } from '../ManageCompaniesForm';
 import { styled } from 'styled-components';
 import { FaFilePdf } from 'react-icons/fa';
 
