@@ -4,20 +4,19 @@ export const Container = styled.div`
     display: flex;
     justify-content: center; 
     align-items: flex-start;
-    padding: 20px;
     margin: 0 auto; 
     max-width: 1200px;
 `;
 
 export const FormContainer = styled.form`
-    width: 30%;
+    width: 33%;
     padding: 20px;
 `;
 
 export const Title = styled.h1`
-    font-size: 25px;
+    font-size: 28px;
     color: #333;
-    margin-top: 3rem;
+    margin-top: 1rem;
     text-align: center;
 `;
 
