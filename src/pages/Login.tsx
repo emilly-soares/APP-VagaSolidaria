@@ -17,10 +17,10 @@ const Login: React.FC = () => {
           .then(response => {
             const role = response.data.role;
             if (role === 'business') {
-              navigate('/managerVacancies');
-            } else if (role == 'admin') {
-              navigate('/managerCompanies');
-            } else if (role == 'candidate') {
+              navigate('/manageVacancies');
+            } else if (role === 'admin') {
+              navigate('/manageCompanies');
+            } else if (role === 'candidate') {
               navigate('/');
             }
           })
