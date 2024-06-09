@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import ManageCompaniesForm from '../components/ManageCompaniesForm';
 
 const ManageCompanies: React.FC = () => {

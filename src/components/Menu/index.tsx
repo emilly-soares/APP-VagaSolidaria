@@ -5,6 +5,7 @@ import logoImg from '../../assets/logo.png';
 import * as S from './style';
 
 const Navbar: React.FC = () => {
+    
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [userName, setUserName] = useState('');
     const [userRole, setUserRole] = useState('');
