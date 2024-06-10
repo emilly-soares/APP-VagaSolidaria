@@ -5,6 +5,12 @@ import { FaTrashAlt, FaEdit } from 'react-icons/fa';
 import CompanyPDF from '../CompanyPDF';
 import Navbar from '../Menu';
 
+export interface User {
+    id: number;
+    name: string;
+    role: string;
+}
+
 export interface Company {
     id: number;
     cnpj: string;
@@ -18,10 +24,12 @@ export interface Company {
     createdAt: string;
     updatedAt: string;
     logo: string;
+    userId: number;
 }
 
 const ManageCompaniesForm: React.FC = () => {
     const [companies, setCompanies] = useState<Company[]>([]);
+    const [users, setUsers] = useState<User[]>([]);
     const [editingCompanyId, setEditingCompanyId] = useState<number | null>(null);
     const [isEditing, setIsEditing] = useState(false);
 
@@ -34,6 +42,7 @@ const ManageCompaniesForm: React.FC = () => {
     const [numberStreet, setNumberStreet] = useState('');
     const [neighborhood, setNeighborhood] = useState('');
     const [logo, setLogo] = useState<File | null>(null);
+    const [userId, setUserId] = useState<number | null>(null);
     const [error, setError] = useState<string>('');
 
     const loadCompanies = async () => {
@@ -45,8 +54,18 @@ const ManageCompaniesForm: React.FC = () => {
         }
     };
 
+    const loadUsers = async () => {
+        try {
+            const response = await api.get('/users');
+            setUsers(response.data);
+        } catch (error) {
+            console.error('Erro ao carregar usuários:', error);
+        }
+    };
+
     useEffect(() => {
         loadCompanies();
+        loadUsers();
     }, []);
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -69,6 +88,9 @@ const ManageCompaniesForm: React.FC = () => {
         formData.append('neighborhood', neighborhood);
         if (logo) {
             formData.append('logo', logo);
+        }
+        if (userId) {
+            formData.append('userId', userId.toString());
         }
 
         try {
@@ -95,6 +117,7 @@ const ManageCompaniesForm: React.FC = () => {
             setNumberStreet('');
             setNeighborhood('');
             setLogo(null);
+            setUserId(null);
 
             loadCompanies();
             setEditingCompanyId(null);
@@ -111,8 +134,7 @@ const ManageCompaniesForm: React.FC = () => {
         try {
             await api.delete(`/company/${companyId}`);
             loadCompanies();
-        } catch
-        (error) {
+        } catch (error) {
             console.error('Erro ao excluir empresa:', error);
         }
     };
@@ -129,6 +151,7 @@ const ManageCompaniesForm: React.FC = () => {
                 setStreet(companyToEdit.street);
                 setNumberStreet(companyToEdit.numberStreet);
                 setNeighborhood(companyToEdit.neighborhood);
+                setUserId(companyToEdit.userId);
                 setLogo(null);
                 setEditingCompanyId(companyId);
                 setIsEditing(true);
@@ -153,6 +176,12 @@ const ManageCompaniesForm: React.FC = () => {
                     <S.InputField type="text" name="numberStreet" value={numberStreet} onChange={(e) => setNumberStreet(e.target.value)} placeholder="Número" required />
                     <S.InputField type="text" name="neighborhood" value={neighborhood} onChange={(e) => setNeighborhood(e.target.value)} placeholder="Bairro" required />
                     <S.InputField type="file" name="logo" onChange={handleFileChange} />
+                    <S.SelectField name="userId" value={userId ?? ''} onChange={(e) => setUserId(Number(e.target.value))} required>
+                        <option value="" disabled>Selecione um usuário</option>
+                        {users.filter(user => user.role === 'business').map(user => (
+                            <option key={user.id} value={user.id}>{user.name}</option>
+                        ))}
+                    </S.SelectField>
                     {error && <S.Error>{error}</S.Error>}
                     <S.SubmitButton type="submit">{isEditing ? 'Editar Empresa' : 'Cadastrar Empresa'}</S.SubmitButton>
                     <CompanyPDF companies={companies} />

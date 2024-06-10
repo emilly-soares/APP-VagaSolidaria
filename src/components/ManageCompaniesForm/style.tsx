@@ -107,4 +107,15 @@ export const CompanyTable = styled.table`
     border-collapse: collapse;
 `;
 
+export const SelectField = styled.select`
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    background-color: #fff;
+    color: #333;
+`;
+
 export const CompanyTableBody = styled.tbody``;
