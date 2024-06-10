@@ -48,24 +48,17 @@ const Vacancies: React.FC = () => {
         loadVacancies();
         loadCompanies();
     }, []);
-
-
     const handleViewDetails = (id: number) => {
         navigate(`/details/vacancy/${id}`);
     };
-
-
-    const filteredVacancies = vacancies.filter(vacancy =>
-        vacancy.jobTitle.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-
+    const filteredVacancies = vacancies
+        .filter(vacancy => vacancy.status)
+        .filter(vacancy => vacancy.jobTitle.toLowerCase().includes(searchTerm.toLowerCase()));
 
     const getCompanyName = (companyId: number) => {
         const company = companies.find(c => c.id === companyId);
         return company ? company.corporateReason : 'Empresa desconhecida';
     };
-
-
     return (
         <>
             <Navbar />
