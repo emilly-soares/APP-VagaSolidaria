@@ -5,7 +5,7 @@ import logoImg from '../../assets/logo.png';
 import * as S from './style';
 
 const Navbar: React.FC = () => {
-    
+
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [userName, setUserName] = useState('');
     const [userRole, setUserRole] = useState('');
@@ -64,10 +64,16 @@ const Navbar: React.FC = () => {
                         {isSubmenuOpen && (
                             <S.Submenu>
                                 {userRole === 'admin' ? (
-                                    <S.SubmenuLink to="/manageCompanies">Gerenciar Empresas</S.SubmenuLink>
+                                    <>
+                                        <S.SubmenuLink to="/manageUsers">Gerenciar Usuários</S.SubmenuLink>
+                                        <S.SubmenuLink to="/manageCompanies">Gerenciar Empresas</S.SubmenuLink>
+                                    </>
                                 ) : (
-                                    <S.SubmenuLink to="/profile">Meu Perfil</S.SubmenuLink>
+                                    userRole === 'business' && (
+                                        <S.SubmenuLink to="/manageVacancies">Gerenciar Vagas</S.SubmenuLink>
+                                    )
                                 )}
+                                <S.SubmenuLink to="/manageUser">Meu Perfil</S.SubmenuLink>
                                 <S.SubmenuLink to="/resetPassword">Alterar Senha</S.SubmenuLink>
                                 <S.SubmenuButton onClick={handleLogout}>Sair</S.SubmenuButton>
                             </S.Submenu>
