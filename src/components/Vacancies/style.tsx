@@ -17,19 +17,13 @@ export const Card = styled.div`
     margin-bottom: 20px;
 `;
 
-export const CardImage = styled.img`
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-`;
-
 export const CardContent = styled.div`
     padding: 20px;
 `;
 
 export const CardTitle = styled.h2`
     font-size: 1.5em;
-    color: #4169E1;
+    color: #2B3377;
     text-align: center;
 `;
 
@@ -40,18 +34,11 @@ export const CardText = styled.p`
     text-align: center;
 `;
 
-export const ViewButton = styled.button`
-    align-self: center; 
-    background-color: #FD9B79;
+export const CardTextClock = styled.p`
+    font-size: 1em;
     color: #333;
-    font-weight: bold;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    &:hover {
-        background-color: #f17e57;
-    }
+    margin: 10px 0;
+    text-align: right;
 `;
 
 export const SearchContainer = styled.div`
@@ -79,5 +66,19 @@ export const SearchInput = styled.input`
     color: #333;
     &:focus {
         border-color: #686DF1;
+    }
+`;
+
+export const ViewButton = styled.button`
+    align-self: center; 
+    background-color: #FD9B79;
+    color: #333;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    &:hover {
+        background-color: #f17e57;
     }
 `;

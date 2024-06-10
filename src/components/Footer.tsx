@@ -4,7 +4,7 @@ import { SiMinutemailer } from "react-icons/si";
 import emailIcon from '../assets/email-icon.svg';
 
 const StyledFooter = styled.footer`
-  background-color: #FAFAFF;
+  background-color: #F1F4F8;
   padding-top: 3rem;
   padding-bottom: 5rem;
   color: #2D3150;
