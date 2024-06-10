@@ -21,9 +21,11 @@ export interface Company {
 }
 
 const Vacancies: React.FC = () => {
+
     const [vacancies, setVacancies] = useState<Vacancy[]>([]);
     const [companies, setCompanies] = useState<Company[]>([]);
     const [searchTerm, setSearchTerm] = useState<string>('');
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -48,9 +50,11 @@ const Vacancies: React.FC = () => {
         loadVacancies();
         loadCompanies();
     }, []);
+
     const handleViewDetails = (id: number) => {
         navigate(`/details/vacancy/${id}`);
     };
+
     const filteredVacancies = vacancies
         .filter(vacancy => vacancy.status)
         .filter(vacancy => vacancy.jobTitle.toLowerCase().includes(searchTerm.toLowerCase()));
@@ -59,6 +63,8 @@ const Vacancies: React.FC = () => {
         const company = companies.find(c => c.id === companyId);
         return company ? company.corporateReason : 'Empresa desconhecida';
     };
+
+
     return (
         <>
             <Navbar />
@@ -76,7 +82,6 @@ const Vacancies: React.FC = () => {
             </S.SearchContainer>
 
             <S.Container>
-
                 {filteredVacancies.map(vacancy => (
                     <S.Card key={vacancy.id}>
                         <S.CardContent>
@@ -88,7 +93,6 @@ const Vacancies: React.FC = () => {
                         </S.CardContent>
                     </S.Card>
                 ))}
-
             </S.Container>
 
             <Footer />
