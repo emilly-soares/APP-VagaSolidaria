@@ -52,7 +52,7 @@ const Navbar: React.FC = () => {
             <S.PlatformTitle to="/">VagaSolidária</S.PlatformTitle>
             <S.NavbarMenu>
                 <S.FlexItem>
-                    <S.NavbarItem to="/opportunities">Oportunidades</S.NavbarItem>
+                    <S.NavbarItem to="/vacancies">Oportunidades</S.NavbarItem>
                 </S.FlexItem>
                 <S.FlexItem>
                     <S.NavbarItem to="/evaluations">Avaliações</S.NavbarItem>

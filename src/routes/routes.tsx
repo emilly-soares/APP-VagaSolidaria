@@ -11,6 +11,7 @@ import UpdateCandidate from './../pages/UpdateCandidate';
 import CompanyOpportunities from "../pages/CompanyOpportunities"
 import Companies from '../components/Companies';
 import ManageVacancies from '../pages/ManageVacancies';
+import VacanciesPage from '../pages/VacanciesPage';
 
 const Router: React.FC = () => {
     return (
@@ -18,7 +19,6 @@ const Router: React.FC = () => {
         <BrowserRouter>
 
             <Routes>
-
                 <Route path="/" element={<HomePage />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<RegisterUser />} />
@@ -30,7 +30,7 @@ const Router: React.FC = () => {
                 <Route path="/manageCompanies" element={<ManageCompanies />} />
                 <Route path="/manageUsers" element={<ManageUsers />} />
                 <Route path="/manageVacancies" element={<ManageVacancies />} />
-
+                <Route path="/vacancies" element={<VacanciesPage />} />
             </Routes>
 
         </BrowserRouter>

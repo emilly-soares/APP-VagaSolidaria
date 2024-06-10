@@ -1,6 +1,6 @@
 import Companies from '../components/Companies';
 
-const HomePage: React.FC = () => {
+const CompaniesPage: React.FC = () => {
     return (
         <div>
             <Companies />
@@ -8,4 +8,4 @@ const HomePage: React.FC = () => {
     );
 };
 
-export default HomePage;
+export default CompaniesPage;
