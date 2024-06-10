@@ -11,7 +11,7 @@ export interface Vacancy {
     description: string;
     jobTitle: string;
     company_id: number;
-
+    workload: string; 
 }
 
 const ManageVacanciesForm: React.FC = () => {
@@ -23,6 +23,7 @@ const ManageVacanciesForm: React.FC = () => {
     const [status, setStatus] = useState(true);
     const [description, setDescription] = useState('');
     const [jobTitle, setJobTitle] = useState('');
+    const [workload, setWorkload] = useState(''); 
     const [companyId, setCompanyId] = useState<number | null>(null); 
 
     const [error, setError] = useState<string>('');
@@ -35,7 +36,6 @@ const ManageVacanciesForm: React.FC = () => {
             console.error('Erro ao carregar vagas:', error);
         }
     };
-
 
     const loadCompanyByUserId = async () => {
         try {
@@ -54,15 +54,12 @@ const ManageVacanciesForm: React.FC = () => {
         }
     };
 
-
     useEffect(() => {
         loadVacancies();
         loadCompanyByUserId(); 
     }, []);
 
-
     const handleSubmit = async (e: React.FormEvent) => {
-
         e.preventDefault();
 
         const vacancyData = {
@@ -70,19 +67,21 @@ const ManageVacanciesForm: React.FC = () => {
             description,
             jobTitle,
             company_id: companyId,
-
+            workload, 
         };
 
         try {
+
             if (isEditing && editingVacancyId) {
                 await api.put(`/vacancy/${editingVacancyId}`, vacancyData);
             } else {
                 await api.post('/vacancy', vacancyData);
             }
- 
+
             setStatus(true);
             setDescription('');
             setJobTitle('');
+            setWorkload('');
 
             loadVacancies();
             setEditingVacancyId(null);
@@ -90,10 +89,12 @@ const ManageVacanciesForm: React.FC = () => {
         } catch (error) {
             console.error('Erro ao criar/editar vaga:', error);
         }
+
     };
 
 
     const handleDeleteVacancy = async (vacancyId: number) => {
+
         const confirmDelete = window.confirm('Tem certeza que deseja excluir esta vaga?');
         if (!confirmDelete) return;
 
@@ -103,6 +104,7 @@ const ManageVacanciesForm: React.FC = () => {
         } catch (error) {
             console.error('Erro ao excluir vaga:', error);
         }
+
     };
 
 
@@ -113,6 +115,7 @@ const ManageVacanciesForm: React.FC = () => {
                 setStatus(vacancyToEdit.status);
                 setDescription(vacancyToEdit.description);
                 setJobTitle(vacancyToEdit.jobTitle);
+                setWorkload(vacancyToEdit.workload);
                 setEditingVacancyId(vacancyId);
                 setIsEditing(true);
             }
@@ -121,10 +124,8 @@ const ManageVacanciesForm: React.FC = () => {
         }
     };
 
-
     return (
         <>
-
             <Navbar />
 
             <S.Title>Gerenciar Vagas</S.Title>
@@ -138,20 +139,20 @@ const ManageVacanciesForm: React.FC = () => {
                     </S.SelectField>
                     <S.InputField type="text" name="jobTitle" value={jobTitle} onChange={(e) => setJobTitle(e.target.value)} placeholder="Título do Cargo" required />
                     <S.InputField type="text" name="description" value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Descrição" required />
+                    <S.InputField type="text" name="workload" value={workload} onChange={(e) => setWorkload(e.target.value)} placeholder="Carga Horária" required /> 
                     {error && <S.Error>{error}</S.Error>}
                     <S.SubmitButton type="submit">{isEditing ? 'Editar Vaga' : 'Cadastrar Vaga'}</S.SubmitButton>
                 </S.FormContainer>
 
                 <S.VacancyList>
-
                     <S.VacancyTable>
-
                         <thead>
                             <tr>
                                 <S.TableHeader>ID</S.TableHeader>
                                 <S.TableHeader>Status</S.TableHeader>
                                 <S.TableHeader>Título do Cargo</S.TableHeader>
                                 <S.TableHeader>Descrição</S.TableHeader>
+                                <S.TableHeader>Carga Horária</S.TableHeader> 
                                 <S.TableHeader>Ações</S.TableHeader>
                             </tr>
                         </thead>
@@ -163,6 +164,7 @@ const ManageVacanciesForm: React.FC = () => {
                                     <S.TableCell>{vacancy.status ? 'Ativa' : 'Inativa'}</S.TableCell>
                                     <S.TableCell>{vacancy.jobTitle}</S.TableCell>
                                     <S.TableCell>{vacancy.description}</S.TableCell>
+                                    <S.TableCell>{vacancy.workload}</S.TableCell> 
                                     <S.TableCell>
                                         <S.ActionButton onClick={() => handleDeleteVacancy(vacancy.id)}><FaTrashAlt /></S.ActionButton>
                                         <S.ActionButton onClick={() => handleEditVacancy(vacancy.id)}><FaEdit /></S.ActionButton>
@@ -170,11 +172,8 @@ const ManageVacanciesForm: React.FC = () => {
                                 </S.TableRow>
                             ))}
                         </S.VacancyTableBody>
-
                     </S.VacancyTable>
-
                 </S.VacancyList>
-
             </S.Container>
         </>
     );
