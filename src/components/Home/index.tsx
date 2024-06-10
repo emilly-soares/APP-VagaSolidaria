@@ -11,8 +11,6 @@ import Navbar from '../Menu';
 
 const Home: React.FC = () => {
 
-
-
     return (
         <>
             <Navbar></Navbar>

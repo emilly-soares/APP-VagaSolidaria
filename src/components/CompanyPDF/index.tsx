@@ -27,6 +27,7 @@ export const GenerateReportButton = styled.button`
 `;
 
 const CompanyPDF: React.FC<CompanyPDFProps> = ({ companies }) => {
+
     const currentDate = new Date();
     const formattedDate = currentDate.toLocaleString();
 
@@ -39,6 +40,7 @@ const CompanyPDF: React.FC<CompanyPDFProps> = ({ companies }) => {
             { text: company.fantasyName, style: rowStyle }
         ];
     });
+
 
     const docDefinition = {
         pageSize: { width: 842, height: 595 },
@@ -82,16 +84,19 @@ const CompanyPDF: React.FC<CompanyPDFProps> = ({ companies }) => {
         }
     };
 
+
     const generatePDF = () => {
-        pdfMake.createPdf(docDefinition).download('empresas.pdf');
+        pdfMake.createPdf(docDefinition).download('relatorio-empresas.pdf');
     };
 
     return (
+        
         <div>
             <GenerateReportButton onClick={generatePDF}>
                 <FaFilePdf /> Gerar Relatório em PDF
             </GenerateReportButton>
         </div>
+
     );
 };
 

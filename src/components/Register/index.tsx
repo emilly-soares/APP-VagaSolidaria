@@ -10,6 +10,7 @@ interface UserFormProps {
 }
 
 const UserForm: React.FC<UserFormProps> = ({ onSuccess }) => {
+
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -45,6 +46,7 @@ const UserForm: React.FC<UserFormProps> = ({ onSuccess }) => {
   };
 
   return (
+
     <S.Container>
 
       <S.LeftSection>
@@ -59,6 +61,7 @@ const UserForm: React.FC<UserFormProps> = ({ onSuccess }) => {
         <S.ButtonRegister to="/login">Login</S.ButtonRegister>
         <S.Description>Você encontrará oportunidades para impactar positivamente a comunidade</S.Description>
       </S.LeftSection>
+
 
       <S.RightSection>
         <S.LoginFormContainer onSubmit={handleSubmit}>
@@ -87,7 +90,9 @@ const UserForm: React.FC<UserFormProps> = ({ onSuccess }) => {
           </S.InputContainer>
 
           {error && <S.Error>{error}</S.Error>}
+
           <S.SubmitButton type="submit">Cadastrar</S.SubmitButton>
+
         </S.LoginFormContainer>
       </S.RightSection>
 

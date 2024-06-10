@@ -8,7 +8,7 @@ export const isAuthenticated = (): boolean => Cookies.get(TOKEN_KEY) !== undefin
 
 export const getToken = (): string | undefined => {
   const token = Cookies.get(TOKEN_KEY);
-  console.log('Token:', token);
+  // console.log('Token:', token);
   return token;
 };
 
@@ -20,6 +20,7 @@ export const login = (token: string, user: any): void => {
 };
 
 export const isTokenExpired = (): boolean => {
+
   try {
     const token = getToken();
     if (!token) return true;
@@ -35,6 +36,7 @@ export const isTokenExpired = (): boolean => {
 };
 
 export const getRoleUser = (): string | undefined => {
+
   const token = getToken();
   if (!token) return undefined;
 

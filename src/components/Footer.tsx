@@ -78,25 +78,34 @@ const IconWrapper = styled.span`
 `;
 
 const Footer: React.FC = () => {
+
   return (
+
     <StyledFooter>
+
       <FooterContent>
         <SupportText>Suporte</SupportText>
+
         <SubscribeText>Inscreva-se</SubscribeText>
+
         <InfoText>Fique sabendo sobre as novas vagas</InfoText>
         <EmailInputGroup>
           <EmailInput
             type="email"
             placeholder="insira seu e-mail"
           />
+
           <SubscribeButton>
             <IconWrapper>
               <SiMinutemailer size={20} />
             </IconWrapper>
             Inscrever
           </SubscribeButton>
+
         </EmailInputGroup>
+
       </FooterContent>
+      
     </StyledFooter>
   );
 };

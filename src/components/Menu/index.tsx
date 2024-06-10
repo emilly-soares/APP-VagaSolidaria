@@ -34,6 +34,7 @@ const Navbar: React.FC = () => {
         checkAuthentication();
     }, []);
 
+
     const handleLogout = () => {
         logout();
         setIsLoggedIn(false);
@@ -42,8 +43,11 @@ const Navbar: React.FC = () => {
         setIsSubmenuOpen(false);
     };
 
+
     return (
+
         <S.ContainerNavbar>
+
             <S.Logo src={logoImg} alt="Logo VagaSolidária" />
             <S.PlatformTitle to="/">VagaSolidária</S.PlatformTitle>
             <S.NavbarMenu>
@@ -57,7 +61,9 @@ const Navbar: React.FC = () => {
                     <S.NavbarItem to="/companies">Empresas</S.NavbarItem>
                 </S.FlexItem>
             </S.NavbarMenu>
+
             <S.NavbarButtons>
+                
                 {isLoggedIn ? (
                     <>
                         <S.Button onClick={toggleSubmenu}>{userName}</S.Button>
@@ -86,6 +92,7 @@ const Navbar: React.FC = () => {
                     </>
                 )}
             </S.NavbarButtons>
+
         </S.ContainerNavbar>
     );
 };

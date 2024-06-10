@@ -15,6 +15,7 @@ export interface Vacancy {
 }
 
 const ManageVacanciesForm: React.FC = () => {
+
     const [vacancies, setVacancies] = useState<Vacancy[]>([]);
     const [editingVacancyId, setEditingVacancyId] = useState<number | null>(null);
     const [isEditing, setIsEditing] = useState(false);
@@ -35,6 +36,7 @@ const ManageVacanciesForm: React.FC = () => {
         }
     };
 
+
     const loadCompanyByUserId = async () => {
         try {
             const userId = await getUserId();
@@ -52,12 +54,15 @@ const ManageVacanciesForm: React.FC = () => {
         }
     };
 
+
     useEffect(() => {
         loadVacancies();
         loadCompanyByUserId(); 
     }, []);
 
+
     const handleSubmit = async (e: React.FormEvent) => {
+
         e.preventDefault();
 
         const vacancyData = {
@@ -87,6 +92,7 @@ const ManageVacanciesForm: React.FC = () => {
         }
     };
 
+
     const handleDeleteVacancy = async (vacancyId: number) => {
         const confirmDelete = window.confirm('Tem certeza que deseja excluir esta vaga?');
         if (!confirmDelete) return;
@@ -98,6 +104,7 @@ const ManageVacanciesForm: React.FC = () => {
             console.error('Erro ao excluir vaga:', error);
         }
     };
+
 
     const handleEditVacancy = async (vacancyId: number) => {
         try {
@@ -114,11 +121,16 @@ const ManageVacanciesForm: React.FC = () => {
         }
     };
 
+
     return (
         <>
+
             <Navbar />
+
             <S.Title>Gerenciar Vagas</S.Title>
+
             <S.Container>
+
                 <S.FormContainer onSubmit={handleSubmit}>
                     <S.SelectField name="status" value={status.toString()} onChange={(e) => setStatus(e.target.value === 'true')} required>
                         <option value="true">Ativa</option>
@@ -131,7 +143,9 @@ const ManageVacanciesForm: React.FC = () => {
                 </S.FormContainer>
 
                 <S.VacancyList>
+
                     <S.VacancyTable>
+
                         <thead>
                             <tr>
                                 <S.TableHeader>ID</S.TableHeader>
@@ -141,6 +155,7 @@ const ManageVacanciesForm: React.FC = () => {
                                 <S.TableHeader>Ações</S.TableHeader>
                             </tr>
                         </thead>
+
                         <S.VacancyTableBody>
                             {vacancies.map((vacancy: Vacancy, index: number) => (
                                 <S.TableRow key={vacancy.id} style={{ backgroundColor: index % 2 === 0 ? '#f4f4f4' : 'white' }}>
@@ -155,8 +170,11 @@ const ManageVacanciesForm: React.FC = () => {
                                 </S.TableRow>
                             ))}
                         </S.VacancyTableBody>
+
                     </S.VacancyTable>
+
                 </S.VacancyList>
+
             </S.Container>
         </>
     );

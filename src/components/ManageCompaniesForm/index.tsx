@@ -28,6 +28,7 @@ export interface Company {
 }
 
 const ManageCompaniesForm: React.FC = () => {
+
     const [companies, setCompanies] = useState<Company[]>([]);
     const [users, setUsers] = useState<User[]>([]);
     const [editingCompanyId, setEditingCompanyId] = useState<number | null>(null);
@@ -43,7 +44,9 @@ const ManageCompaniesForm: React.FC = () => {
     const [neighborhood, setNeighborhood] = useState('');
     const [logo, setLogo] = useState<File | null>(null);
     const [userId, setUserId] = useState<number | null>(null);
+    
     const [error, setError] = useState<string>('');
+
 
     const loadCompanies = async () => {
         try {
@@ -51,8 +54,10 @@ const ManageCompaniesForm: React.FC = () => {
             setCompanies(response.data);
         } catch (error) {
             console.error('Erro ao carregar empresas:', error);
+            setError('Erro ao carregar');
         }
     };
+
 
     const loadUsers = async () => {
         try {
@@ -60,6 +65,7 @@ const ManageCompaniesForm: React.FC = () => {
             setUsers(response.data);
         } catch (error) {
             console.error('Erro ao carregar usuários:', error);
+            setError('Erro ao carregar');
         }
     };
 
@@ -68,16 +74,19 @@ const ManageCompaniesForm: React.FC = () => {
         loadUsers();
     }, []);
 
+
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
             setLogo(e.target.files[0]);
         }
     };
 
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
         const formData = new FormData();
+
         formData.append('cnpj', cnpj);
         formData.append('phone', phone);
         formData.append('ie', ie);
@@ -86,6 +95,7 @@ const ManageCompaniesForm: React.FC = () => {
         formData.append('street', street);
         formData.append('numberStreet', numberStreet);
         formData.append('neighborhood', neighborhood);
+
         if (logo) {
             formData.append('logo', logo);
         }
@@ -122,13 +132,17 @@ const ManageCompaniesForm: React.FC = () => {
             loadCompanies();
             setEditingCompanyId(null);
             setIsEditing(false);
+
         } catch (error) {
             console.error('Erro ao criar/editar empresa:', error);
         }
     };
 
+
     const handleDeleteCompany = async (companyId: number) => {
+
         const confirmDelete = window.confirm('Tem certeza que deseja excluir esta empresa?');
+
         if (!confirmDelete) return;
 
         try {
@@ -139,9 +153,12 @@ const ManageCompaniesForm: React.FC = () => {
         }
     };
 
+
     const handleEditCompany = async (companyId: number) => {
+
         try {
             const companyToEdit = companies.find((company: Company) => company.id === companyId);
+
             if (companyToEdit) {
                 setCnpj(companyToEdit.cnpj);
                 setPhone(companyToEdit.phone);
@@ -161,11 +178,17 @@ const ManageCompaniesForm: React.FC = () => {
         }
     };
 
+
     return (
+
         <>
+
             <Navbar></Navbar>
+
             <S.Title>Gerenciar Empresas</S.Title>
+
             <S.Container>
+
                 <S.FormContainer onSubmit={handleSubmit}>
                     <S.InputField type="text" name="cnpj" value={cnpj} onChange={(e) => setCnpj(e.target.value)} placeholder="CNPJ" required />
                     <S.InputField type="text" name="fantasyName" value={fantasyName} onChange={(e) => setFantasyName(e.target.value)} placeholder="Nome Fantasia" required />
@@ -182,13 +205,19 @@ const ManageCompaniesForm: React.FC = () => {
                             <option key={user.id} value={user.id}>{user.name}</option>
                         ))}
                     </S.SelectField>
+
                     {error && <S.Error>{error}</S.Error>}
+
                     <S.SubmitButton type="submit">{isEditing ? 'Editar Empresa' : 'Cadastrar Empresa'}</S.SubmitButton>
                     <CompanyPDF companies={companies} />
+
                 </S.FormContainer>
 
+
                 <S.CompanyList>
+
                     <S.CompanyTable>
+
                         <thead>
                             <tr>
                                 <S.TableHeader>CNPJ</S.TableHeader>
@@ -200,9 +229,11 @@ const ManageCompaniesForm: React.FC = () => {
                                 <S.TableHeader>Ações</S.TableHeader>
                             </tr>
                         </thead>
+
                         <S.CompanyTableBody>
                             {companies.map((company: Company, index: number) => (
                                 <S.TableRow key={company.id} style={{ backgroundColor: index % 2 === 0 ? '#f4f4f4' : 'white' }}>
+
                                     <S.TableCell>{company.cnpj}</S.TableCell>
                                     <S.TableCell>{company.ie}</S.TableCell>
                                     <S.TableCell>{company.corporateReason}</S.TableCell>
@@ -221,12 +252,18 @@ const ManageCompaniesForm: React.FC = () => {
                                         <S.ActionButton onClick={() => handleDeleteCompany(company.id)}><FaTrashAlt /></S.ActionButton>
                                         <S.ActionButton onClick={() => handleEditCompany(company.id)}><FaEdit /></S.ActionButton>
                                     </S.TableCell>
+
                                 </S.TableRow>
                             ))}
+
                         </S.CompanyTableBody>
+
                     </S.CompanyTable>
+
                 </S.CompanyList>
+
             </S.Container>
+
         </>
     );
 };

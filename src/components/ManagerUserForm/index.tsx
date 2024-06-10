@@ -12,6 +12,7 @@ export interface User {
 }
 
 const ManageUsersForm: React.FC = () => {
+
     const [users, setUsers] = useState<User[]>([]);
     const [editingUserId, setEditingUserId] = useState<number | null>(null);
     const [isEditing, setIsEditing] = useState(false);
@@ -26,15 +27,18 @@ const ManageUsersForm: React.FC = () => {
             setUsers(response.data);
         } catch (error) {
             console.error('Erro ao carregar usuários:', error);
-            setError('error');
+            setError('Erro ao carregar');
         }
     };
+
 
     useEffect(() => {
         loadUsers();
     }, []);
 
+
     const handleSubmit = async (e: React.FormEvent) => {
+
         e.preventDefault();
 
         try {
@@ -56,10 +60,12 @@ const ManageUsersForm: React.FC = () => {
             loadUsers();
             setEditingUserId(null);
             setIsEditing(false);
+
         } catch (error) {
             console.error('Erro ao criar/editar usuário:', error);
         }
     };
+
 
     const handleDeleteUser = async (userId: number) => {
         const confirmDelete = window.confirm('Tem certeza que deseja excluir este usuário?');
@@ -73,6 +79,7 @@ const ManageUsersForm: React.FC = () => {
         }
     };
 
+
     const handleEditUser = (user: User) => {
         setName(user.name);
         setEmail(user.email);
@@ -80,11 +87,16 @@ const ManageUsersForm: React.FC = () => {
         setIsEditing(true);
     };
 
+
     return (
+
         <>
             <Navbar />
+
             <S.Title>Gerenciar Usuários</S.Title>
+
             <S.Container>
+
                 <S.FormContainer onSubmit={handleSubmit}>
                     <S.InputField type="text" name="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Nome" required />
                     <S.InputField type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" required />
@@ -93,7 +105,9 @@ const ManageUsersForm: React.FC = () => {
                 </S.FormContainer>
 
                 <S.UserList>
+
                     <S.UserTable>
+
                         <thead>
                             <tr>
                                 <S.TableHeader>Nome</S.TableHeader>
@@ -102,8 +116,10 @@ const ManageUsersForm: React.FC = () => {
                                 <S.TableHeader>Ações</S.TableHeader>
                             </tr>
                         </thead>
+                        
                         <S.UserTableBody>
                             {users.map((user: User) => (
+                                
                                 <S.TableRow key={user.id}>
                                     <S.TableCell>{user.name}</S.TableCell>
                                     <S.TableCell>{user.email}</S.TableCell>
@@ -117,11 +133,16 @@ const ManageUsersForm: React.FC = () => {
                                         </S.ActionButton>
                                     </S.TableCell>
                                 </S.TableRow>
+
                             ))}
                         </S.UserTableBody>
+
                     </S.UserTable>
+
                 </S.UserList>
+
             </S.Container>
+
         </>
     );
 };

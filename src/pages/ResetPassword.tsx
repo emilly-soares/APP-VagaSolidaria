@@ -17,9 +17,11 @@ const ResetPassword: React.FC = () => {
   }
 
   return (
+
     <div>
       <ResetPasswordForm onSuccess={handleUpdatePassword} />
     </div>
+    
   );
 };
 

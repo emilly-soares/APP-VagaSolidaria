@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import UpdatePasswordFormProps from '../components/UpdatePassword';
 
 const UpdatePassword: React.FC = () => {
+
   const navigate = useNavigate();
   const [isUpdate, setIsUpdate] = useState(false);
 
@@ -16,9 +17,11 @@ const UpdatePassword: React.FC = () => {
   }
 
   return (
+
     <div>
       <UpdatePasswordFormProps onSuccess={handleUpdatePassword} />
     </div>
+    
   );
 };
 

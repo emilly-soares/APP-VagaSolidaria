@@ -5,7 +5,7 @@ import * as S from './style';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 import logoImg from '../../assets/logo.svg';
 import vacancyCircle2 from '../../assets/vacancyCircle2.png';
-import {TOKEN_KEY, USER_ID} from '../../services/authconfig';
+import { TOKEN_KEY, USER_ID } from '../../services/authconfig';
 interface LoginFormProps {
   onSuccess: () => void;
 }
@@ -60,6 +60,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
         <S.Description>Você encontrará oportunidades para impactar positivamente a comunidade</S.Description>
       </S.LeftSection>
 
+
       <S.RightSection>
         <S.LoginFormContainer onSubmit={handleSubmit}>
 
@@ -86,6 +87,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
           <S.SubmitButton type="submit">Acessar</S.SubmitButton>
         </S.LoginFormContainer>
       </S.RightSection>
+
 
     </S.Container>
   );

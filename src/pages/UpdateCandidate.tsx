@@ -5,10 +5,11 @@ const UpdateCandidate: React.FC = () => {
 
 
     return (
-        <div>
 
+        <div>
             <CandidateForm />
         </div>
+        
     );
 };
 export default UpdateCandidate;

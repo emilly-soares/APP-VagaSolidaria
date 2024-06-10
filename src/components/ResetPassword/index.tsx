@@ -9,6 +9,7 @@ interface ResetPasswordFormProps {
 }
 
 const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ onSuccess }) => {
+
   const [email, setEmail] = useState('');
   const [error, setError] = useState<string>('');
 
@@ -27,8 +28,11 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ onSuccess }) => {
     }
   };
 
+
   return (
+
     <S.Container>
+
       <S.LeftSection>
         <S.GroupLogo to="/" >
           <S.Logo src={logoImg} alt="Logo VagaSolidária" />
@@ -41,6 +45,7 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ onSuccess }) => {
         <S.ButtonRegister to="/register">Cadastre-se</S.ButtonRegister>
         <S.Description>Você encontrará oportunidades para impactar positivamente a comunidade</S.Description>
       </S.LeftSection>
+
 
       <S.RightSection>
         <S.LoginFormContainer onSubmit={handleSubmit}>
@@ -59,8 +64,10 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ onSuccess }) => {
 
           {error && <S.Error>{error}</S.Error>}
           <S.SubmitButton type="submit">Enviar E-mail de Redefinição</S.SubmitButton>
+          
         </S.LoginFormContainer>
       </S.RightSection>
+
     </S.Container>
   );
 };

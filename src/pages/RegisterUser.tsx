@@ -3,6 +3,7 @@ import UserForm from '../components/Register';
 import { useNavigate } from 'react-router-dom';
 
 const RegisterUser: React.FC = () => {
+
   const navigate = useNavigate();
   const [isRegistered, setIsRegistered] = useState(false);
 
@@ -16,9 +17,11 @@ const RegisterUser: React.FC = () => {
   }
 
   return (
+
     <div>
       <UserForm onSuccess={handleUserRegisterSuccess} />
     </div>
+    
   );
 };
 

@@ -3,7 +3,7 @@ import api from '../../services/api';
 import { useNavigate } from 'react-router-dom';
 import * as S from './style';
 import Navbar from '../Menu';
-import { FaSearch } from 'react-icons/fa';  // Import the search icon
+import { FaSearch } from 'react-icons/fa'; 
 import Footer from '../Footer';
 
 export interface Company {
@@ -22,6 +22,7 @@ export interface Company {
 }
 
 const Companies: React.FC = () => {
+
     const [companies, setCompanies] = useState<Company[]>([]);
     const [searchTerm, setSearchTerm] = useState<string>('');
     const navigate = useNavigate();
@@ -39,9 +40,11 @@ const Companies: React.FC = () => {
         loadCompanies();
     }, []);
 
+
     const handleViewOpportunities = (id: number) => {
         navigate(`/opportunities/${id}`);
     };
+
 
     const filteredCompanies = companies.filter(company =>
         company.corporateReason.toLowerCase().includes(searchTerm.toLowerCase())
@@ -50,6 +53,7 @@ const Companies: React.FC = () => {
     return (
         <>
             <Navbar />
+
             <S.SearchContainer>
                 <S.SearchWrapper>
                     <S.SearchInput
@@ -61,7 +65,9 @@ const Companies: React.FC = () => {
                     <FaSearch color="white" size={20} style={{ margin: '0 10px' }} />
                 </S.SearchWrapper>
             </S.SearchContainer>
+
             <S.Container>
+
                 {filteredCompanies.map(company => (
                     <S.Card key={company.id}>
                         <S.CardImage src={`http://localhost:3003/uploads/${company.logo}`} alt={`${company.fantasyName} logo`} />
@@ -75,8 +81,11 @@ const Companies: React.FC = () => {
                 ))}
 
                 <Footer></Footer>
+
             </S.Container>
+
         </>
+        
     );
 };
 

@@ -4,7 +4,6 @@ import RegisterUser from '../pages/RegisterUser';
 import Login from '../pages/Login';
 import ManageCompanies from '../pages/ManageCompanies';
 import ManageUsers from '../pages/ManagerUsers';
-import Vacancy from '../pages/Vacancy';
 import HomePage from '../pages/HomePage';
 import ResetPassword from '../pages/ResetPassword';
 import UpdatePassword from '../pages/UpdatePassword';
@@ -15,11 +14,13 @@ import ManageVacancies from '../pages/ManageVacancies';
 
 const Router: React.FC = () => {
     return (
+        
         <BrowserRouter>
+
             <Routes>
+
                 <Route path="/" element={<HomePage />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/vacancy" element={<Vacancy />} />
                 <Route path="/register" element={<RegisterUser />} />
                 <Route path="/resetPassword" element={<ResetPassword />} />
                 <Route path="/updatePassword" element={<UpdatePassword />} />
@@ -29,7 +30,9 @@ const Router: React.FC = () => {
                 <Route path="/manageCompanies" element={<ManageCompanies />} />
                 <Route path="/manageUsers" element={<ManageUsers />} />
                 <Route path="/manageVacancies" element={<ManageVacancies />} />
+
             </Routes>
+
         </BrowserRouter>
     );
 };

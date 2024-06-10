@@ -11,7 +11,7 @@ export const Container = styled.div`
 export const LeftSection = styled.div`
   width: 50%;
   padding: 20px;
-  background-color: #5187F0; /* Azul */
+  background-color: #5187F0; 
   height: 100%;
   display: flex;
   flex-direction: column;

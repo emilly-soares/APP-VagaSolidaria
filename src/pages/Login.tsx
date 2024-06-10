@@ -5,6 +5,7 @@ import api from '../services/api';
 import { getUserId } from '../services/authconfig';
 
 const Login: React.FC = () => {
+
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -33,14 +34,18 @@ const Login: React.FC = () => {
     }
   }, [isLoggedIn, navigate]);
 
+
   const handleUserLoginSuccess = () => {
     setIsLoggedIn(true);
   };
 
+
   return (
+
     <div>
       <LoginForm onSuccess={handleUserLoginSuccess} />
     </div>
+
   );
 };
 

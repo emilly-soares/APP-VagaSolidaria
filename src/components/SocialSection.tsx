@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FaLinkedin,FaInstagram, FaWhatsapp } from 'react-icons/fa';
+import { FaLinkedin, FaInstagram, FaWhatsapp } from 'react-icons/fa';
 
 const Section = styled.section`
   background-color: #ffffff;
@@ -62,17 +62,24 @@ const Button = styled.button`
 `;
 
 const SocialSection: React.FC = () => {
+
   return (
+
     <Section>
+
       <Container>
         <Title><Yellow>Compartilhe</Yellow> suas Conquistas</Title>
+
         <SocialIcons>
           <FaLinkedin size={50} color="#0e76a8" background-color="#FFFFFF" />
           <FaInstagram size={50} color="#d6249f" />
           <FaWhatsapp size={50} color="#075e54" background-color="#075e54" />
         </SocialIcons>
+
         <Button>Cadastre-se</Button>
+        
       </Container>
+
     </Section>
   );
 };

@@ -4,10 +4,11 @@ const ManageCompanies: React.FC = () => {
 
 
     return (
-        <div>
 
+        <div>
             <ManageCompaniesForm />
         </div>
+        
     );
 };
 

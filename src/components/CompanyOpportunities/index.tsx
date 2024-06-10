@@ -10,8 +10,10 @@ interface Opportunity {
 }
 
 const CompanyOpportunities: React.FC = () => {
+
     const { id } = useParams<{ id: string }>();
     const [opportunities, setOpportunities] = useState<Opportunity[]>([]);
+
 
     useEffect(() => {
         const fetchOpportunities = async () => {
@@ -26,16 +28,22 @@ const CompanyOpportunities: React.FC = () => {
         fetchOpportunities();
     }, [id]);
 
+
     return (
+
         <S.Container>
+
             <S.Title>Oportunidades</S.Title>
+
             {opportunities.map(opportunity => (
                 <S.Card key={opportunity.id}>
                     <S.CardTitle>{opportunity.title}</S.CardTitle>
                     <S.CardText>{opportunity.description}</S.CardText>
                 </S.Card>
             ))}
+            
         </S.Container>
+
     );
 };
 

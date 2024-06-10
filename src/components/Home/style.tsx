@@ -69,7 +69,7 @@ export const Menu = styled.div`
 `;
 
 export const YellowButton = styled(Link)`
-    background-color: #FFCA1D; /* Amarelo */
+    background-color: #FFCA1D; 
     text-decoration: none;
     font-weight: bold;
     padding: 1rem 1rem;
@@ -82,7 +82,7 @@ export const YellowButton = styled(Link)`
 `;
 
 export const RegisterButton = styled(Link)`
-    background-color: #FFCA1D; /* Amarelo */
+    background-color: #FFCA1D;
     text-decoration: none;
     font-weight: bold;
     padding: 1rem 1rem;
@@ -94,7 +94,7 @@ export const RegisterButton = styled(Link)`
     margin-top: 2rem;
     &:hover {
         background-color: #FFD43B;
-}
+    }
     `;
 
 export const BenefitsSection = styled.div`
