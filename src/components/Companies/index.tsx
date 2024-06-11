@@ -42,7 +42,7 @@ const Companies: React.FC = () => {
 
 
     const handleViewOpportunities = (id: number) => {
-        navigate(`/opportunities/${id}`);
+        navigate(`/vacancies/company/${id}`);
     };
 
 

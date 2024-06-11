@@ -12,6 +12,7 @@ import CompanyOpportunities from "../pages/CompanyOpportunities"
 import Companies from '../components/Companies';
 import ManageVacancies from '../pages/ManageVacancies';
 import VacanciesPage from '../pages/VacanciesPage';
+import VacanciesPerCompanyForm from '../pages/VacanciesPerCompanyForm';
 
 const Router: React.FC = () => {
     return (
@@ -31,6 +32,7 @@ const Router: React.FC = () => {
                 <Route path="/manageUsers" element={<ManageUsers />} />
                 <Route path="/manageVacancies" element={<ManageVacancies />} />
                 <Route path="/vacancies" element={<VacanciesPage />} />
+                <Route path="/vacancies/company/:companyId" element={<VacanciesPerCompanyForm />} />
             </Routes>
 
         </BrowserRouter>
