@@ -50,6 +50,12 @@ export const Error = styled.p`
     margin-top: 10px;
 `;
 
+export const SuccessMessage = styled.p`
+    color: green;
+    font-weight: bold;
+    margin-top: 10px;
+`;
+
 export const CompanyList = styled.div`
     width: 70%;
     padding: 20px;
