@@ -34,7 +34,6 @@ const Navbar: React.FC = () => {
         checkAuthentication();
     }, []);
 
-
     const handleLogout = () => {
         logout();
         setIsLoggedIn(false);
@@ -43,11 +42,8 @@ const Navbar: React.FC = () => {
         setIsSubmenuOpen(false);
     };
 
-
     return (
-
         <S.ContainerNavbar>
-
             <S.Logo src={logoImg} alt="Logo VagaSolidária" />
             <S.PlatformTitle to="/">VagaSolidária</S.PlatformTitle>
             <S.NavbarMenu>
@@ -63,23 +59,26 @@ const Navbar: React.FC = () => {
             </S.NavbarMenu>
 
             <S.NavbarButtons>
-                
                 {isLoggedIn ? (
                     <>
                         <S.Button onClick={toggleSubmenu}>{userName}</S.Button>
                         {isSubmenuOpen && (
                             <S.Submenu>
-                                {userRole === 'admin' ? (
+                                {userRole === 'admin' && (
                                     <>
                                         <S.SubmenuLink to="/manageUsers">Gerenciar Usuários</S.SubmenuLink>
                                         <S.SubmenuLink to="/manageCompanies">Gerenciar Empresas</S.SubmenuLink>
                                     </>
-                                ) : (
-                                    userRole === 'business' && (
-                                        <S.SubmenuLink to="/manageVacancies">Gerenciar Vagas</S.SubmenuLink>
-                                    )
                                 )}
-                                <S.SubmenuLink to="/manageUser">Meu Perfil</S.SubmenuLink>
+                                {userRole === 'business' && (
+                                    <>
+                                        <S.SubmenuLink to="/manageVacancies">Gerenciar Vagas</S.SubmenuLink>
+                                        <S.SubmenuLink to="/manageUser/Company">Meu Perfil</S.SubmenuLink>
+                                    </>
+                                )}
+                                {userRole === 'candidate' && (
+                                    <S.SubmenuLink to="/manageUser/Candidate">Meu Perfil</S.SubmenuLink>
+                                )}
                                 <S.SubmenuLink to="/resetPassword">Alterar Senha</S.SubmenuLink>
                                 <S.SubmenuButton onClick={handleLogout}>Sair</S.SubmenuButton>
                             </S.Submenu>
@@ -92,7 +91,6 @@ const Navbar: React.FC = () => {
                     </>
                 )}
             </S.NavbarButtons>
-
         </S.ContainerNavbar>
     );
 };
