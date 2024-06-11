@@ -46,7 +46,7 @@ const ManageCompaniesForm: React.FC = () => {
     const [userId, setUserId] = useState<number | null>(null);
     
     const [error, setError] = useState<string>('');
-
+    const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
     const loadCompanies = async () => {
         try {
@@ -132,6 +132,7 @@ const ManageCompaniesForm: React.FC = () => {
             loadCompanies();
             setEditingCompanyId(null);
             setIsEditing(false);
+            setSuccessMessage('Dados alterados/cadastrados com sucesso!');
 
         } catch (error) {
             console.error('Erro ao criar/editar empresa:', error);
@@ -190,15 +191,64 @@ const ManageCompaniesForm: React.FC = () => {
             <S.Container>
 
                 <S.FormContainer onSubmit={handleSubmit}>
-                    <S.InputField type="text" name="cnpj" value={cnpj} onChange={(e) => setCnpj(e.target.value)} placeholder="CNPJ" required />
-                    <S.InputField type="text" name="fantasyName" value={fantasyName} onChange={(e) => setFantasyName(e.target.value)} placeholder="Nome Fantasia" required />
-                    <S.InputField type="text" name="corporateReason" value={corporateReason} onChange={(e) => setCorporateReason(e.target.value)} placeholder="Razão Social" required />
-                    <S.InputField type="text" name="ie" value={ie} onChange={(e) => setIe(e.target.value)} placeholder="Inscrição Estadual" required />
-                    <S.InputField type="text" name="phone" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Telefone" required />
-                    <S.InputField type="text" name="street" value={street} onChange={(e) => setStreet(e.target.value)} placeholder="Rua" required />
-                    <S.InputField type="text" name="numberStreet" value={numberStreet} onChange={(e) => setNumberStreet(e.target.value)} placeholder="Número" required />
-                    <S.InputField type="text" name="neighborhood" value={neighborhood} onChange={(e) => setNeighborhood(e.target.value)} placeholder="Bairro" required />
-                    <S.InputField type="file" name="logo" onChange={handleFileChange} />
+                    
+                    <S.InputField 
+                    type="text" 
+                    name="cnpj" 
+                    value={cnpj} 
+                    onChange={(e) => setCnpj(e.target.value)} 
+                    placeholder="CNPJ" required />
+
+                    <S.InputField 
+                    type="text" 
+                    name="fantasyName" 
+                    value={fantasyName} 
+                    onChange={(e) => setFantasyName(e.target.value)} 
+                    placeholder="Nome Fantasia" required />
+
+                    <S.InputField 
+                    type="text" 
+                    name="corporateReason" 
+                    value={corporateReason} 
+                    onChange={(e) => setCorporateReason(e.target.value)} 
+                    placeholder="Razão Social" required />
+
+                    <S.InputField 
+                    type="text" 
+                    name="ie" value={ie} 
+                    onChange={(e) => setIe(e.target.value)} 
+                    placeholder="Inscrição Estadual" required />
+
+                    <S.InputField 
+                    type="text" 
+                    name="phone" 
+                    value={phone} onChange={(e) => setPhone(e.target.value)} 
+                    placeholder="Telefone" required />
+
+                    <S.InputField
+                     type="text" 
+                     name="street" 
+                     value={street} onChange={(e) => setStreet(e.target.value)} 
+                     placeholder="Rua" required />
+
+                    <S.InputField 
+                    type="text" 
+                    name="numberStreet" 
+                    value={numberStreet} onChange={(e) => setNumberStreet(e.target.value)} 
+                    placeholder="Número" required />
+
+                    <S.InputField 
+                    type="text" 
+                    name="neighborhood" 
+                    value={neighborhood}
+                    onChange={(e) => setNeighborhood(e.target.value)} 
+                    placeholder="Bairro" required />
+
+                    <S.InputField 
+                    type="file" 
+                    name="logo" 
+                    onChange={handleFileChange} />
+
                     <S.SelectField name="userId" value={userId ?? ''} onChange={(e) => setUserId(Number(e.target.value))} required>
                         <option value="" disabled>Selecione um usuário</option>
                         {users.filter(user => user.role === 'business').map(user => (
@@ -207,8 +257,10 @@ const ManageCompaniesForm: React.FC = () => {
                     </S.SelectField>
 
                     {error && <S.Error>{error}</S.Error>}
+                    {successMessage && <S.SuccessMessage>{successMessage}</S.SuccessMessage>}
 
                     <S.SubmitButton type="submit">{isEditing ? 'Editar Empresa' : 'Cadastrar Empresa'}</S.SubmitButton>
+                    
                     <CompanyPDF companies={companies} />
 
                 </S.FormContainer>
