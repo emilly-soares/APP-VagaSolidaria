@@ -61,7 +61,7 @@ const VacanciesPerCompany: React.FC = () => {
 
 
     const handleViewDetails = (id: number) => {
-        navigate(`/details/vacancy/${id}`);
+        navigate(`/vacancy/${id}`);
     };
 
 

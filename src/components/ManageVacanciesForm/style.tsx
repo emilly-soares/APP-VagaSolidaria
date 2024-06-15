@@ -117,4 +117,26 @@ export const VacancyTable = styled.table`
     border-collapse: collapse;
 `;
 
+export const TextareaField = styled.textarea`
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    resize: vertical; 
+    line-height: 1.5; 
+
+    background: repeating-linear-gradient(
+        white, 
+        white 25px, 
+        #f4f4f4 26px
+    );
+    outline: none;
+
+    &:focus {
+        border-color: #007bff;
+    }
+`;
+
 export const VacancyTableBody = styled.tbody``;

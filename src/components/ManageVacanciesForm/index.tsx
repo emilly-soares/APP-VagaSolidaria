@@ -11,7 +11,8 @@ export interface Vacancy {
     description: string;
     jobTitle: string;
     company_id: number;
-    workload: string; 
+    workload: string;
+    responsibilities: string; 
 }
 
 const ManageVacanciesForm: React.FC = () => {
@@ -23,8 +24,10 @@ const ManageVacanciesForm: React.FC = () => {
     const [status, setStatus] = useState(true);
     const [description, setDescription] = useState('');
     const [jobTitle, setJobTitle] = useState('');
-    const [workload, setWorkload] = useState(''); 
-    const [companyId, setCompanyId] = useState<number | null>(null); 
+    const [workload, setWorkload] = useState('');
+    const [companyId, setCompanyId] = useState<number | null>(null);
+    const [responsibilities, setResponsibilities] = useState('');
+
 
     const [error, setError] = useState<string>('');
 
@@ -42,7 +45,7 @@ const ManageVacanciesForm: React.FC = () => {
             const userId = await getUserId();
             const response = await api.get(`/company/${userId}`);
             if (response.data && response.data.id) {
-                setCompanyId(response.data.id); 
+                setCompanyId(response.data.id);
                 console.log(companyId);
             } else {
                 console.error('Empresa não encontrada para o usuário:', userId);
@@ -56,7 +59,7 @@ const ManageVacanciesForm: React.FC = () => {
 
     useEffect(() => {
         loadVacancies();
-        loadCompanyByUserId(); 
+        loadCompanyByUserId();
     }, []);
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -67,11 +70,11 @@ const ManageVacanciesForm: React.FC = () => {
             description,
             jobTitle,
             company_id: companyId,
-            workload, 
+            workload,
+            responsibilities
         };
 
         try {
-
             if (isEditing && editingVacancyId) {
                 await api.put(`/vacancy/${editingVacancyId}`, vacancyData);
             } else {
@@ -82,6 +85,7 @@ const ManageVacanciesForm: React.FC = () => {
             setDescription('');
             setJobTitle('');
             setWorkload('');
+            setResponsibilities('');
 
             loadVacancies();
             setEditingVacancyId(null);
@@ -89,12 +93,9 @@ const ManageVacanciesForm: React.FC = () => {
         } catch (error) {
             console.error('Erro ao criar/editar vaga:', error);
         }
-
     };
 
-
     const handleDeleteVacancy = async (vacancyId: number) => {
-
         const confirmDelete = window.confirm('Tem certeza que deseja excluir esta vaga?');
         if (!confirmDelete) return;
 
@@ -104,9 +105,7 @@ const ManageVacanciesForm: React.FC = () => {
         } catch (error) {
             console.error('Erro ao excluir vaga:', error);
         }
-
     };
-
 
     const handleEditVacancy = async (vacancyId: number) => {
         try {
@@ -116,6 +115,7 @@ const ManageVacanciesForm: React.FC = () => {
                 setDescription(vacancyToEdit.description);
                 setJobTitle(vacancyToEdit.jobTitle);
                 setWorkload(vacancyToEdit.workload);
+                setResponsibilities(vacancyToEdit.responsibilities);
                 setEditingVacancyId(vacancyId);
                 setIsEditing(true);
             }
@@ -139,7 +139,14 @@ const ManageVacanciesForm: React.FC = () => {
                     </S.SelectField>
                     <S.InputField type="text" name="jobTitle" value={jobTitle} onChange={(e) => setJobTitle(e.target.value)} placeholder="Título do Cargo" required />
                     <S.InputField type="text" name="description" value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Descrição" required />
-                    <S.InputField type="text" name="workload" value={workload} onChange={(e) => setWorkload(e.target.value)} placeholder="Carga Horária" required /> 
+                    <S.InputField type="text" name="workload" value={workload} onChange={(e) => setWorkload(e.target.value)} placeholder="Carga Horária" required />
+                    <S.TextareaField
+                        name="responsibilities"
+                        value={responsibilities}
+                        onChange={(e) => setResponsibilities(e.target.value)}
+                        placeholder="Responsabilidades (ex.: - Planejar e preparar atividades recreativas / Interagir e engajar/ Colaborar com outros voluntários)"
+                        required
+                    />
                     {error && <S.Error>{error}</S.Error>}
                     <S.SubmitButton type="submit">{isEditing ? 'Editar Vaga' : 'Cadastrar Vaga'}</S.SubmitButton>
                 </S.FormContainer>
@@ -152,7 +159,7 @@ const ManageVacanciesForm: React.FC = () => {
                                 <S.TableHeader>Status</S.TableHeader>
                                 <S.TableHeader>Título do Cargo</S.TableHeader>
                                 <S.TableHeader>Descrição</S.TableHeader>
-                                <S.TableHeader>Carga Horária</S.TableHeader> 
+                                <S.TableHeader>Carga Horária</S.TableHeader>
                                 <S.TableHeader>Ações</S.TableHeader>
                             </tr>
                         </thead>
@@ -164,7 +171,7 @@ const ManageVacanciesForm: React.FC = () => {
                                     <S.TableCell>{vacancy.status ? 'Ativa' : 'Inativa'}</S.TableCell>
                                     <S.TableCell>{vacancy.jobTitle}</S.TableCell>
                                     <S.TableCell>{vacancy.description}</S.TableCell>
-                                    <S.TableCell>{vacancy.workload}</S.TableCell> 
+                                    <S.TableCell>{vacancy.workload}</S.TableCell>
                                     <S.TableCell>
                                         <S.ActionButton onClick={() => handleDeleteVacancy(vacancy.id)}><FaTrashAlt /></S.ActionButton>
                                         <S.ActionButton onClick={() => handleEditVacancy(vacancy.id)}><FaEdit /></S.ActionButton>
