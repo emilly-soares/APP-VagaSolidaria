@@ -6,6 +6,8 @@ import Footer from '../Footer';
 import * as S from './style';
 import clock from '../../assets/clock.svg';
 import report from '../../assets/report.png';
+import whatsapp from '../../assets/whatsapp.png';
+import map from '../../assets/map.svg';
 
 export interface Vacancy {
     id: number;
@@ -31,7 +33,6 @@ export interface Company {
 }
 
 const VacancyDetails: React.FC = () => {
-
     const { id } = useParams<{ id: string }>();
 
     const [vacancy, setVacancy] = useState<Vacancy | null>(null);
@@ -130,6 +131,19 @@ const VacancyDetails: React.FC = () => {
                             src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBvynskStAY8dOhT8gw0DIaUDSm0fGgcPw&q=${encodeURIComponent(address)}`}
                         />
 
+                        {company && (
+                            <>
+                                <S.CompanyInfo>
+                                    <S.CompanyAddress><S.MapIcon src={map} alt=""/>{address}, Nova Andradina - MS, 79750-000</S.CompanyAddress>
+                                    <S.CompanyName>{company.fantasyName}</S.CompanyName>
+                                    {company.logo && <S.CompanyLogo src={`http://localhost:3003/uploads/${company.logo}`} alt={`${company.fantasyName} logo`} />}
+                                    <S.CompanyPhone href={`https://wa.me/${company.phone.replace(/\D/g, '')}`} target="_blank">
+                                        <S.WhatsappIcon src={whatsapp} alt="WhatsApp" />
+                                        {company.phone}
+                                    </S.CompanyPhone>
+                                </S.CompanyInfo>
+                            </>
+                        )}
                     </S.DetailsRight>
 
                 </S.DetailsContainer>
@@ -137,6 +151,12 @@ const VacancyDetails: React.FC = () => {
                 <div className="report">
                     <S.Report src={report}></S.Report>
                 </div>
+
+                <S.FirstSection>
+                    <S.Caption>Você encontrará oportunidades para impactar positivamente a comunidade!</S.Caption>
+                    <S.RegisterButton to='/register'>Cadastre-se</S.RegisterButton>
+                </S.FirstSection>
+
             </S.Container>
 
             <Footer />
