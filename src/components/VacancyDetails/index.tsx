@@ -4,7 +4,8 @@ import api from '../../services/api';
 import Navbar from '../Menu';
 import Footer from '../Footer';
 import * as S from './style';
-import { FaClock } from 'react-icons/fa';
+import clock from '../../assets/clock.svg';
+import report from '../../assets/report.png';
 
 export interface Vacancy {
     id: number;
@@ -13,6 +14,7 @@ export interface Vacancy {
     jobTitle: string;
     company_id: number;
     workload: string;
+    responsibilities: string;
 }
 
 export interface Company {
@@ -62,23 +64,32 @@ const VacancyDetails: React.FC = () => {
     return (
         <>
             <Navbar />
-
             <S.Container>
-                <S.SectionTitle>Sobre a Oportunidade</S.SectionTitle>
+
+                <S.SectionTitle>
+                    <span>Sobre a </span>
+                    <span className="highlight">Oportunidade</span>
+                </S.SectionTitle>
 
                 <S.DetailsContainer>
 
                     <S.DetailsLeft>
-                        <S.JobTitle>{vacancy?.jobTitle}</S.JobTitle>
 
-                        <S.JobDetails><FaClock style={{ marginRight: '5px', color: "#2B3377" }} />Presencial: {vacancy?.workload}</S.JobDetails>
+                        <S.JobTitleContainer>
+                            <S.JobTitle>{vacancy?.jobTitle}</S.JobTitle>
+                            <S.JobDetails><S.Clock src={clock} style={{ marginRight: '10px', color: "#2B3377" }} />Presencial: {vacancy?.workload}</S.JobDetails>
+                        </S.JobTitleContainer>
 
                         <S.Text>
                             Ao se tornar um {vacancy?.jobTitle}, você terá a oportunidade de contribuir para momentos inesquecíveis e experiências enriquecedoras para pessoas de todas as idades.
                         </S.Text>
 
                         <S.Text>
-                            <strong>Responsabilidades:</strong> {vacancy?.description}
+                            <strong>Sobre a Vaga:</strong> {vacancy?.description}
+                        </S.Text>
+
+                        <S.Text>
+                            <strong>Responsabilidades:</strong> {vacancy?.responsibilities}
                         </S.Text>
 
                         <S.Text>
@@ -103,15 +114,15 @@ const VacancyDetails: React.FC = () => {
                             value={availability}
                             onChange={(e) => setAvailability(e.target.value)}
                         />
+
                         <S.Button onClick={handleApply}>Candidatar-se</S.Button>
 
                     </S.DetailsLeft>
 
-
                     <S.DetailsRight>
                         <iframe
-                            width="70%"
-                            height="400"
+                            width="80%"
+                            height="500"
                             style={{ border: 0 }}
                             loading="lazy"
                             allowFullScreen
@@ -120,10 +131,16 @@ const VacancyDetails: React.FC = () => {
                         />
 
                     </S.DetailsRight>
+
                 </S.DetailsContainer>
+
+                <div className="report">
+                    <S.Report src={report}></S.Report>
+                </div>
             </S.Container>
 
             <Footer />
+
         </>
     );
 };
