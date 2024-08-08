@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import * as S from './style';
-import Navbar from '../Menu';
 import { getUserId } from '../../services/authconfig';
 import api from '../../services/api';
 
@@ -90,7 +89,6 @@ const CandidateForm: React.FC = () => {
     };
 
 
-
     const handleSubmit = async (e: React.FormEvent) => {
 
         e.preventDefault();
@@ -113,9 +111,6 @@ const CandidateForm: React.FC = () => {
 
     return (
         <>
-
-            <Navbar />
-
             <S.Container>
 
                 <S.FormContainer onSubmit={handleSubmit}>

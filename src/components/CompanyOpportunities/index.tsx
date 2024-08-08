@@ -12,8 +12,8 @@ interface Opportunity {
 const CompanyOpportunities: React.FC = () => {
 
     const { id } = useParams<{ id: string }>();
-    const [opportunities, setOpportunities] = useState<Opportunity[]>([]);
 
+    const [opportunities, setOpportunities] = useState<Opportunity[]>([]);
 
     useEffect(() => {
         const fetchOpportunities = async () => {
@@ -41,7 +41,7 @@ const CompanyOpportunities: React.FC = () => {
                     <S.CardText>{opportunity.description}</S.CardText>
                 </S.Card>
             ))}
-            
+
         </S.Container>
 
     );

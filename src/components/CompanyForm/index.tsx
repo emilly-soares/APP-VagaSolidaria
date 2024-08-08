@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import * as S from './style';
-import Navbar from '../Menu';
 import { getUserId } from '../../services/authconfig';
 import api from '../../services/api';
 
@@ -15,7 +14,7 @@ export interface Company {
     numberStreet: string;
     neighborhood: string;
     logo?: string;
-    userId?: number; 
+    userId?: number;
 }
 
 export interface User {
@@ -26,7 +25,7 @@ export interface User {
 
 const CompanyForm: React.FC = () => {
 
-    const userId = Number(getUserId()); 
+    const userId = Number(getUserId());
 
     const [company, setCompany] = useState<Company>({
         id: 0,
@@ -39,7 +38,7 @@ const CompanyForm: React.FC = () => {
         numberStreet: '',
         neighborhood: '',
         logo: '',
-        userId: userId 
+        userId: userId
     });
 
     const [user, setUser] = useState<User>({
@@ -49,7 +48,8 @@ const CompanyForm: React.FC = () => {
     });
 
     const [successMessage, setSuccessMessage] = useState<string | null>(null);
-    const [logo, setLogo] = useState<File | null>(null); 
+
+    const [logo, setLogo] = useState<File | null>(null);
 
     useEffect(() => {
         async function fetchData() {
@@ -60,7 +60,7 @@ const CompanyForm: React.FC = () => {
                 const responseCompany = await api.get(`/company/${userId}`);
                 if (responseCompany.data) {
                     setCompany(responseCompany.data);
-    
+
                 }
 
             } catch (error) {
@@ -94,7 +94,9 @@ const CompanyForm: React.FC = () => {
 
 
     const handleSubmit = async (e: React.FormEvent) => {
+
         e.preventDefault();
+
         try {
             await api.put(`/user/${userId}`, user);
 
@@ -107,27 +109,30 @@ const CompanyForm: React.FC = () => {
             formData.append('street', company.street);
             formData.append('numberStreet', company.numberStreet);
             formData.append('neighborhood', company.neighborhood);
+
             if (logo) {
                 formData.append('logo', logo);
             }
-            formData.append('userId', company.userId?.toString() || ''); 
 
-          
-                await api.put(`/company/${company.id}`, formData, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data',
-                    },
-                });
-        
+            formData.append('userId', company.userId?.toString() || '');
+
+            await api.put(`/company/${company.id}`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+
             setSuccessMessage('Dados alterados com sucesso!');
+
         } catch (error) {
             console.error('Erro ao alterar dados:', error);
         }
     };
 
+
     return (
         <>
-            <Navbar />
+
             <S.Container>
                 <S.FormContainer onSubmit={handleSubmit}>
                     <S.Label htmlFor="email">E-mail:</S.Label>
@@ -239,7 +244,9 @@ const CompanyForm: React.FC = () => {
 
                     <S.SubmitButton type="submit">Salvar</S.SubmitButton>
                 </S.FormContainer>
+
                 {successMessage && <S.SuccessMessage>{successMessage}</S.SuccessMessage>}
+                
             </S.Container>
         </>
     );

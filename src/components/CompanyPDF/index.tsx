@@ -32,7 +32,7 @@ const CompanyPDF: React.FC<CompanyPDFProps> = ({ companies }) => {
     const formattedDate = currentDate.toLocaleString();
 
     const tableBody = companies.map((company, index) => {
-        const rowStyle = index % 2 === 0 ? 'even-row' : 'odd-row'; 
+        const rowStyle = index % 2 === 0 ? 'even-row' : 'odd-row';
         return [
             { text: company.id.toString(), style: rowStyle },
             { text: company.cnpj, style: rowStyle },
@@ -79,7 +79,7 @@ const CompanyPDF: React.FC<CompanyPDFProps> = ({ companies }) => {
                 fillColor: '#BBD0FA'
             },
             'odd-row': {
-                fillColor: '#FFFFFF' 
+                fillColor: '#FFFFFF'
             }
         }
     };
@@ -90,7 +90,7 @@ const CompanyPDF: React.FC<CompanyPDFProps> = ({ companies }) => {
     };
 
     return (
-        
+
         <div>
             <GenerateReportButton onClick={generatePDF}>
                 <FaFilePdf /> Gerar Relatório em PDF

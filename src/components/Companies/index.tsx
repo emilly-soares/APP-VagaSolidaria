@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import api from '../../services/api';
 import { useNavigate } from 'react-router-dom';
 import * as S from './style';
-import Navbar from '../Menu';
 import { FaSearch } from 'react-icons/fa'; 
 import Footer from '../Footer';
 
@@ -25,6 +24,7 @@ const Companies: React.FC = () => {
 
     const [companies, setCompanies] = useState<Company[]>([]);
     const [searchTerm, setSearchTerm] = useState<string>('');
+    
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -52,18 +52,22 @@ const Companies: React.FC = () => {
 
     return (
         <>
-            <Navbar />
 
             <S.SearchContainer>
+
                 <S.SearchWrapper>
+
                     <S.SearchInput
                         type="text"
                         placeholder="Pesquisar pela razão social..."
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
+
                     <FaSearch color="white" size={20} style={{ margin: '0 10px' }} />
+
                 </S.SearchWrapper>
+
             </S.SearchContainer>
 
             <S.Container>
@@ -79,8 +83,6 @@ const Companies: React.FC = () => {
                         </S.CardContent>
                     </S.Card>
                 ))}
-
-                <Footer></Footer>
 
             </S.Container>
 
