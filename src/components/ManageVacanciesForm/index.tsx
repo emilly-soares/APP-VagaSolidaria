@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import api from '../../services/api';
 import * as S from './style';
 import { FaTrashAlt, FaEdit } from 'react-icons/fa';
-import Navbar from '../Menu';
 import { getUserId } from '../../services/authconfig';
 
 export interface Vacancy {
@@ -12,7 +11,7 @@ export interface Vacancy {
     jobTitle: string;
     company_id: number;
     workload: string;
-    responsibilities: string; 
+    responsibilities: string;
 }
 
 const ManageVacanciesForm: React.FC = () => {
@@ -126,7 +125,6 @@ const ManageVacanciesForm: React.FC = () => {
 
     return (
         <>
-            <Navbar />
 
             <S.Title>Gerenciar Vagas</S.Title>
 

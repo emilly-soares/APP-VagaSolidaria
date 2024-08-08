@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
 import { logout, isAuthenticated, getUserId } from '../../services/authconfig';
 import api from '../../services/api';
 import logoImg from '../../assets/logo.png';
+import circle from "../../assets/vacancyCircle.png";
 import * as S from './style';
 
-const Navbar: React.FC = () => {
+export  const Navbar: React.FC = () =>{
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [userName, setUserName] = useState('');
@@ -73,6 +74,7 @@ const Navbar: React.FC = () => {
                                 {userRole === 'business' && (
                                     <>
                                         <S.SubmenuLink to="/manageVacancies">Gerenciar Vagas</S.SubmenuLink>
+                                        <S.SubmenuLink to="/vacanciesList">Gerenciar Candidatos</S.SubmenuLink>
                                         <S.SubmenuLink to="/manageUser/Company">Meu Perfil</S.SubmenuLink>
                                     </>
                                 )}
@@ -92,7 +94,24 @@ const Navbar: React.FC = () => {
                 )}
             </S.NavbarButtons>
         </S.ContainerNavbar>
+
+
     );
 };
 
-export default Navbar;
+export const Menu: React.FC = () => {
+    return (
+        <S.ContainerMenu>
+            <S.LeftSection>
+                <S.Title>Unindo Voluntários e Oportunidades Solidárias</S.Title>
+            </S.LeftSection>
+
+            <S.RightSection>
+                <S.imgCircle src={circle} alt="encontre uma vaga"/>
+            </S.RightSection>
+        </S.ContainerMenu>
+
+    )
+};
+
+

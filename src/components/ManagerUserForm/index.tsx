@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import api from '../../services/api';
 import * as S from './style';
 import { FaTrashAlt, FaEdit } from 'react-icons/fa';
-import Navbar from '../Menu';
 
 export interface User {
     id: number;
@@ -91,7 +90,6 @@ const ManageUsersForm: React.FC = () => {
     return (
 
         <>
-            <Navbar />
 
             <S.Title>Gerenciar Usuários</S.Title>
 

@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import api from '../../services/api';
-import Navbar from '../Menu';
-import Footer from '../Footer';
 import * as S from './style';
 import clock from '../../assets/clock.svg';
 import report from '../../assets/report.png';
 import whatsapp from '../../assets/whatsapp.png';
 import map from '../../assets/map.svg';
+import { getUserId } from '../../services/authconfig';
+import Modal from 'react-modal';
 
 export interface Vacancy {
     id: number;
@@ -33,14 +33,33 @@ export interface Company {
 }
 
 const VacancyDetails: React.FC = () => {
+    
+    const userId = Number(getUserId());
     const { id } = useParams<{ id: string }>();
+    const navigate = useNavigate();
 
     const [vacancy, setVacancy] = useState<Vacancy | null>(null);
     const [company, setCompany] = useState<Company | null>(null);
-
     const [availability, setAvailability] = useState<string>('');
+    const [candidateId, setCandidateId] = useState<number | null>(null);
+    
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
     useEffect(() => {
+        const fetchCandidateId = async () => {
+            try {
+                const response = await api.get(`/candidate/user/${userId}`);
+                const candidateId = response.data.candidateId;
+                setCandidateId(candidateId);
+                if (!candidateId) {
+                    setIsModalOpen(true);
+                }
+            } catch (error) {
+                console.error('Erro ao carregar ID do candidato:', error);
+                setIsModalOpen(true);
+            }
+        };
+
         const fetchVacancyDetails = async () => {
             try {
                 const response = await api.get(`/vacancy/${id}`);
@@ -52,33 +71,47 @@ const VacancyDetails: React.FC = () => {
             }
         };
 
+        fetchCandidateId();
         fetchVacancyDetails();
-    }, [id]);
 
-    const handleApply = () => {
-        console.log('Candidatar-se com disponibilidade:', availability);
+    }, [id, userId, navigate]);
+
+    const handleApply = async () => {
+        try {
+            if (vacancy && candidateId !== null) {
+                const response = await api.post('/apply', {
+                    vacancyId: vacancy.id,
+                    candidateId,
+                    availability,
+                });
+                console.log('Candidatura enviada com sucesso!', response.data);
+            } else {
+                console.error('A vaga ou ID do candidato está nulo. Não é possível enviar a candidatura.');
+            }
+        } catch (error) {
+            console.error('Erro ao enviar candidatura:', error);
+        }
+    };
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+        navigate('/manageUser/Candidate');
     };
 
     const address = company ? `${company.street} ${company.numberStreet}, ${company.neighborhood}` : '';
-    console.log(address);
 
     return (
         <>
-            <Navbar />
             <S.Container>
-
                 <S.SectionTitle>
                     <span>Sobre a </span>
                     <span className="highlight">Oportunidade</span>
                 </S.SectionTitle>
 
                 <S.DetailsContainer>
-
                     <S.DetailsLeft>
-
                         <S.JobTitleContainer>
-                            <S.JobTitle>{vacancy?.jobTitle}</S.JobTitle>
-                            <S.JobDetails><S.Clock src={clock} style={{ marginRight: '10px', color: "#2B3377" }} />Presencial: {vacancy?.workload}</S.JobDetails>
+                            <S.JobTitle>{vacancy?.jobTitle ?? 'Vaga não encontrada'}</S.JobTitle>
                         </S.JobTitleContainer>
 
                         <S.Text>
@@ -117,7 +150,6 @@ const VacancyDetails: React.FC = () => {
                         />
 
                         <S.Button onClick={handleApply}>Candidatar-se</S.Button>
-
                     </S.DetailsLeft>
 
                     <S.DetailsRight>
@@ -134,7 +166,7 @@ const VacancyDetails: React.FC = () => {
                         {company && (
                             <>
                                 <S.CompanyInfo>
-                                    <S.CompanyAddress><S.MapIcon src={map} alt=""/>{address}, Nova Andradina - MS, 79750-000</S.CompanyAddress>
+                                    <S.CompanyAddress><S.MapIcon src={map} alt="" />{address}, Nova Andradina - MS, 79750-000</S.CompanyAddress>
                                     <S.CompanyName>{company.fantasyName}</S.CompanyName>
                                     {company.logo && <S.CompanyLogo src={`http://localhost:3003/uploads/${company.logo}`} alt={`${company.fantasyName} logo`} />}
                                     <S.CompanyPhone href={`https://wa.me/${company.phone.replace(/\D/g, '')}`} target="_blank">
@@ -145,7 +177,6 @@ const VacancyDetails: React.FC = () => {
                             </>
                         )}
                     </S.DetailsRight>
-
                 </S.DetailsContainer>
 
                 <div className="report">
@@ -156,11 +187,30 @@ const VacancyDetails: React.FC = () => {
                     <S.Caption>Você encontrará oportunidades para impactar positivamente a comunidade!</S.Caption>
                     <S.RegisterButton to='/register'>Cadastre-se</S.RegisterButton>
                 </S.FirstSection>
-
             </S.Container>
 
-            <Footer />
-
+            <Modal
+                isOpen={isModalOpen}
+                onRequestClose={handleCloseModal}
+                contentLabel="Cadastro Necessário"
+                style={{
+                    content: {
+                        top: '50%',
+                        left: '50%',
+                        right: 'auto',
+                        bottom: 'auto',
+                        marginRight: '-50%',
+                        transform: 'translate(-50%, -50%)',
+                        padding: '20px',
+                        maxWidth: '500px',
+                        textAlign: 'center'
+                    },
+                }}
+            >
+                <h2>Cadastro Necessário</h2>
+                <p>Para continuar, você precisa se cadastrar como candidato.</p>
+                <button onClick={handleCloseModal}>Cadastrar-se</button>
+            </Modal>
         </>
     );
 };
