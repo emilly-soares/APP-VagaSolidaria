@@ -8,7 +8,7 @@ export const ContainerNavbar = styled.nav`
     justify-content: space-between;
     align-items: center;
     height: 80px;
-    padding: 1rem 2rem;
+    padding: 2rem 0.5rem 0.5rem 2rem;
     color: #FFFFFF;
 `;
 
@@ -44,6 +44,7 @@ export const NavbarButtons = styled.div`
     display: flex;
     align-items: center;
     margin-right: 2rem; 
+    z-index: 2; 
 `;
 
 export const NavbarButton = styled(Link)`
@@ -79,11 +80,24 @@ export const Button = styled.button`
 
 export const FlexItem = styled.div`
     flex: 1;
+    z-index: 2;
 `;
 
 export const Logo = styled.img`
     width: 150px;
     height: auto;
+`;
+
+export const imgCircle = styled.img`
+    padding-top: 3rem;
+    width: 600px;
+    height: auto;
+    pointer-events: none;
+`;
+
+export const RightSection = styled.div`
+    width: 50%;
+
 `;
 
 export const PlatformTitle = styled(Link)`
@@ -98,6 +112,7 @@ export const PlatformTitle = styled(Link)`
 
 
 export const Submenu = styled.div`
+    z-index: 2; 
     background-color: #FFFFFF;
     position: absolute;
     right: 10px;
@@ -109,17 +124,44 @@ export const Submenu = styled.div`
 
 export const SubmenuLink = styled(Link)`
     display: block;
-    padding: 10px 20px;
+    padding: 10px 10px;
     color: #333;
     font-size: 16px;
     text-decoration: none;
+    z-index: 2;
     &:hover {
         background-color: #f5f5f5;
     }
 `;
 
+export const ContainerMenu = styled.nav`
+    width: 100%;
+    background-color: #5187F0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 120px;
+    color: #FFFFFF;
+    padding: 0rem 0.5rem 4rem 2.5rem;
+`;
+
+export const LeftSection = styled.div`
+    width: 50%;
+    height: 120px;
+    background-color: #5187F0;
+`;
+
+export const Title = styled.h1`
+    font-size: 42px;
+    font-weight: bold;
+    width: 70%;
+    padding-left: 2rem;
+    color: #FFFFFF;
+`;
+
 export const SubmenuButton = styled.button`
     display: block;
+   z-index: 2; 
     width: 100%;  
     padding: 10px 20px;
     color: #333;

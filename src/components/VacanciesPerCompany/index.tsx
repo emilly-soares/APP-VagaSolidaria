@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../services/api';
 import * as S from './style';
-import Navbar from '../Menu';
-import Footer from '../Footer';
 import { FaSearch, FaClock } from 'react-icons/fa';
 import { useNavigate, useParams } from 'react-router-dom';
 import brand from '../../assets/brand.png';
@@ -71,7 +69,6 @@ const VacanciesPerCompany: React.FC = () => {
 
     return (
         <>
-            <Navbar />
 
             <S.SearchContainer>
                 <S.SearchWrapper>
@@ -111,7 +108,6 @@ const VacanciesPerCompany: React.FC = () => {
                 )}
             </S.Container>
 
-            <Footer />
         </>
     );
 };
