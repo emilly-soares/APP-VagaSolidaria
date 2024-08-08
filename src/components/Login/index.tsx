@@ -45,23 +45,29 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
   };
 
   return (
+
     <S.Container>
 
       <S.LeftSection>
+
         <S.GroupLogo to="/" >
           <S.Logo src={logoImg} alt="Logo VagaSolidária" />
           <S.PlatformTitle>VagaSolidária</S.PlatformTitle>
         </S.GroupLogo>
+
         <div>
           <S.Vacancy src={vacancyCircle2} alt="Encontre sua Vaga" />
         </div>
+
         <S.Text>Não tem cadastro?</S.Text>
         <S.ButtonRegister to="/register">Cadastre-se</S.ButtonRegister>
         <S.Description>Você encontrará oportunidades para impactar positivamente a comunidade</S.Description>
+
       </S.LeftSection>
 
 
       <S.RightSection>
+
         <S.LoginFormContainer onSubmit={handleSubmit}>
 
           <S.Title>Login</S.Title>
@@ -78,16 +84,22 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
+
             <S.TogglePasswordVisibility onClick={() => setShowPassword(!showPassword)}>
               {showPassword ? <FiEyeOff /> : <FiEye />}
             </S.TogglePasswordVisibility>
-          </S.InputContainer>
-          <S.ResetPassword to="/resetPassword">Esqueceu a Senha?</S.ResetPassword>
-          {error && <S.Error>{error}</S.Error>}
-          <S.SubmitButton type="submit">Acessar</S.SubmitButton>
-        </S.LoginFormContainer>
-      </S.RightSection>
 
+          </S.InputContainer>
+
+          <S.ResetPassword to="/resetPassword">Esqueceu a Senha?</S.ResetPassword>
+
+          {error && <S.Error>{error}</S.Error>}
+
+          <S.SubmitButton type="submit">Acessar</S.SubmitButton>
+
+        </S.LoginFormContainer>
+
+      </S.RightSection>
 
     </S.Container>
   );

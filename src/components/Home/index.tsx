@@ -7,15 +7,19 @@ import comment from '../../assets/comment.png';
 import benefit from '../../assets/benefit.svg';
 import center from '../../assets/center.svg';
 import registerSection from '../../assets/registerSection.svg'
-import Navbar from '../Menu';
+import { Navbar } from '../Menu';
 
 const Home: React.FC = () => {
 
     return (
         <>
-            <Navbar></Navbar>
+
+            <Navbar />
+
             <S.Container>
+
                 <S.Menu>
+
                     <S.PlatformSection>
 
                         <S.PlatformButton>
@@ -23,15 +27,17 @@ const Home: React.FC = () => {
                         </S.PlatformButton>
 
                         <S.PlatformFlex>
-                        <S.LeftSection>
-                            <S.HomeTitle>Unindo Voluntários e Oportunidades Solidárias</S.HomeTitle>
-                            <S.Caption>VagaSolidária é uma plataforma online que reúne voluntários e organizações para compartilhar oportunidades de trabalho voluntário em projetos sociais</S.Caption>
-                            <S.YellowButton to="/Vagas">Vagas Disponíveis</S.YellowButton>
-                        </S.LeftSection>
 
-                        <S.ReviewsSection>
-                            <S.Comment src={comment} alt="comentários" ></S.Comment>
-                        </S.ReviewsSection>
+                            <S.LeftSection>
+                                <S.HomeTitle>Unindo Voluntários e Oportunidades Solidárias</S.HomeTitle>
+                                <S.Caption>VagaSolidária é uma plataforma online que reúne voluntários e organizações para compartilhar oportunidades de trabalho voluntário em projetos sociais</S.Caption>
+                                <S.YellowButton to="/Vagas">Vagas Disponíveis</S.YellowButton>
+                            </S.LeftSection>
+
+                            <S.ReviewsSection>
+                                <S.Comment src={comment} alt="comentários" ></S.Comment>
+                            </S.ReviewsSection>
+
                         </S.PlatformFlex>
 
                     </S.PlatformSection>
@@ -46,7 +52,6 @@ const Home: React.FC = () => {
                         <S.Caption>Você encontrará oportunidades para impactar positivamente a comunidade!</S.Caption>
                         <S.RegisterButton to='/register'>Cadastre-se</S.RegisterButton>
                     </S.FirstSection>
-
 
                     <div className="benefits">
                         <S.Benefit src={benefit}></S.Benefit>
