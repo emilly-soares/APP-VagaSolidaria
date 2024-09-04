@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import CompanyForm from './../components/CompanyForm/index';
 
@@ -10,7 +10,7 @@ const UpdateCompany: React.FC = () => {
         <div>
             <CompanyForm />
         </div>
-        
+
     );
 };
 export default UpdateCompany;

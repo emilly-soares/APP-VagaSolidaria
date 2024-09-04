@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { logout, isAuthenticated, getUserId } from '../../services/authconfig';
 import api from '../../services/api';
 import logoImg from '../../assets/logo.png';
@@ -50,9 +50,6 @@ export  const Navbar: React.FC = () =>{
             <S.NavbarMenu>
                 <S.FlexItem>
                     <S.NavbarItem to="/vacancies">Oportunidades</S.NavbarItem>
-                </S.FlexItem>
-                <S.FlexItem>
-                    <S.NavbarItem to="/evaluations">Avaliações</S.NavbarItem>
                 </S.FlexItem>
                 <S.FlexItem>
                     <S.NavbarItem to="/companies">Empresas</S.NavbarItem>

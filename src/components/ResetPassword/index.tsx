@@ -18,10 +18,11 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ onSuccess }) => {
 
     try {
       const response = await api.post('/resetPassword', { email });
+      console.log(response);
       onSuccess();
     } catch (error: any) {
       if (error.response) {
-        setError(error.response.data.error);
+        setError(error.response.data.error, );
       } else {
         setError('Ocorreu um erro ao tentar enviar o e-mail de redefinição de senha');
       }

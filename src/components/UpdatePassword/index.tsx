@@ -9,7 +9,7 @@ interface UpdatePasswordFormProps {
   onSuccess: () => void;
 }
 
-const UpdatePasswordFormProps: React.FC<UpdatePasswordFormProps> = ({ onSuccess }) => {
+const UpdatePasswordForm: React.FC<UpdatePasswordFormProps> = ({ onSuccess }) => {
 
   const [email, setEmail] = useState('');
   const [newPassword, setNewPassword] = useState('');
@@ -110,4 +110,4 @@ const UpdatePasswordFormProps: React.FC<UpdatePasswordFormProps> = ({ onSuccess 
   );
 };
 
-export default UpdatePasswordFormProps;
+export default UpdatePasswordForm;

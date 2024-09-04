@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import api from '../../services/api';
 import * as S from './style';
-import clock from '../../assets/clock.svg';
 import report from '../../assets/report.png';
 import whatsapp from '../../assets/whatsapp.png';
 import map from '../../assets/map.svg';
@@ -48,8 +47,8 @@ const VacancyDetails: React.FC = () => {
     useEffect(() => {
         const fetchCandidateId = async () => {
             try {
-                const response = await api.get(`/candidate/user/${userId}`);
-                const candidateId = response.data.candidateId;
+                const response = await api.get(`/user-candidateFind/${userId}`);
+                const candidateId = response.data.id;
                 setCandidateId(candidateId);
                 if (!candidateId) {
                     setIsModalOpen(true);
@@ -209,7 +208,7 @@ const VacancyDetails: React.FC = () => {
             >
                 <h2>Cadastro Necessário</h2>
                 <p>Para continuar, você precisa se cadastrar como candidato.</p>
-                <button onClick={handleCloseModal}>Cadastrar-se</button>
+                <S.ModalButton onClick={handleCloseModal}>Cadastrar-se</S.ModalButton>
             </Modal>
         </>
     );

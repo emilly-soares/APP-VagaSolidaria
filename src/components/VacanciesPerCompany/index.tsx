@@ -26,7 +26,6 @@ const VacanciesPerCompany: React.FC = () => {
 
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(true);
-    const [errorMessage, setErrorMessage] = useState<string>('');
 
     const { companyId } = useParams<{ companyId: string }>();
     const navigate = useNavigate();
@@ -39,7 +38,6 @@ const VacanciesPerCompany: React.FC = () => {
                 setLoading(false);
             } catch (error) {
                 console.error('Erro ao carregar vagas:', error);
-                setErrorMessage('Ainda não há vagas cadastradas para esta empresa.');
                 setLoading(false);
             }
         };
@@ -56,6 +54,7 @@ const VacanciesPerCompany: React.FC = () => {
         loadVacancies();
         loadCompany();
     }, [companyId]);
+
 
 
     const handleViewDetails = (id: number) => {
@@ -102,8 +101,8 @@ const VacanciesPerCompany: React.FC = () => {
                     ))
                 ) : (
                     <>
-                    <S.Message>Ainda não há vagas cadastradas para esta empresa. ☹️Fique atento às futuras oportunidades!</S.Message>
-                    <S.Image src={brand} alt="Sem Vagas" ></S.Image>
+                        <S.Message>Ainda não há vagas cadastradas para esta empresa. ☹️Fique atento às futuras oportunidades!</S.Message>
+                        <S.Image src={brand} alt="Sem Vagas" ></S.Image>
                     </>
                 )}
             </S.Container>

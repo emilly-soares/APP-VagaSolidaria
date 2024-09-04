@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import CandidateForm from '../components/CandidateForm';
 
 const UpdateCandidate: React.FC = () => {

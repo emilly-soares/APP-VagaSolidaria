@@ -6,7 +6,8 @@ import line from '../../assets/line.svg';
 import comment from '../../assets/comment.png';
 import benefit from '../../assets/benefit.svg';
 import center from '../../assets/center.svg';
-import registerSection from '../../assets/registerSection.svg'
+import registerSection from '../../assets/registerSection.svg';
+import whatsapp from '../../assets/whatsapp.png';
 import { Navbar } from '../Menu';
 
 const Home: React.FC = () => {
@@ -43,6 +44,13 @@ const Home: React.FC = () => {
                     </S.PlatformSection>
 
                 </S.Menu>
+
+                <S.PopupContainer>
+                    <S.WhatsAppLink href="https://wa.me/67999757009" target="_blank" rel="noopener noreferrer">
+                        <S.WhatsAppIcon src={whatsapp} alt="WhatsApp" />
+                        Fale Conosco
+                    </S.WhatsAppLink>
+                </S.PopupContainer>
 
                 <S.BenefitsSection>
 

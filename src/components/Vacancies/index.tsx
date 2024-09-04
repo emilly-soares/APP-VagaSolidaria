@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../services/api';
 import * as S from './style';
-import Footer from '../Footer';
 import { FaSearch, FaClock } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
@@ -93,7 +92,6 @@ const Vacancies: React.FC = () => {
                 ))}
             </S.Container>
 
-            <Footer />
         </>
     );
 };
