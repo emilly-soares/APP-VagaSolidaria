@@ -29,7 +29,7 @@ export const LeftSection = styled.div`
 `;
 
 export const ReviewsSection = styled.div`
-    width: 50%;
+    width: 60%;
 `;
 
 export const HomeTitle = styled.h1`
@@ -63,7 +63,7 @@ export const HandWaveEmoji = styled.span`
 
 export const Menu = styled.div`
     color: white;
-    height: 600px; 
+    height: 550px; 
     background-color: #5187F0;
     
 `;
@@ -99,7 +99,7 @@ export const RegisterButton = styled(Link)`
 
 export const BenefitsSection = styled.div`
     width: 100%;
-    margin-left: 7rem;
+    margin-left: 2rem;
     margin-top: 3rem;
     margin-bottom: 3rem;
     font-size: 18px;
@@ -115,14 +115,50 @@ export const FirstSection = styled.div`
 export const Benefit = styled.img`
     margin-top: 7rem;
     margin-left: 1rem;
+    width: 95%;
 `;
 
 export const CompanyBenefits = styled.img`
     margin-top: 10rem;
     margin-left: 1rem;
+    width: 98%;
 `;
 
 export const RegisterSection = styled.img`
     margin-top: 10rem;
     margin-left: 1rem;
+    width: 100%;
+`;
+
+export const PopupContainer = styled.div`
+    position: fixed;
+    bottom: 15px;
+    right: 10px;
+    z-index: 1000;
+    background-color: #25d366;
+    padding: 5px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+
+    &:hover {
+        transform: scale(1.1);
+    }
+`;
+
+export const WhatsAppIcon = styled.img`
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    margin-top: 10px;
+`;
+
+export const WhatsAppLink = styled.a`
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    padding-bottom: 10px;
 `;

@@ -114,7 +114,7 @@ export const CompanyTable = styled.table`
 `;
 
 export const SuccessMessage = styled.p`
-    color: green;
+    color: #4169E1;
     font-weight: bold;
     margin-top: 10px;
 `;

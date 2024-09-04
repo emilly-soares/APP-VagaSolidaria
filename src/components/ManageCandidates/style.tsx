@@ -61,3 +61,22 @@ export const CandidateNeighborhood = styled.p`
   font-size: 16px;
   color: #777;
 `;
+
+export const GenerateCertificateButton = styled.button`
+    background-color: #4169E1;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: #4169E1;;
+    }
+`;

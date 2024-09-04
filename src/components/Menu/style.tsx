@@ -106,7 +106,7 @@ export const PlatformTitle = styled(Link)`
     text-decoration: none;
     color: #FFFFFF;
     position: absolute;
-    left: 12%;
+    left: 14.4%;
     transform: translateX(-50%);
 `;
 
@@ -140,7 +140,7 @@ export const ContainerMenu = styled.nav`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 120px;
+    height: 200px;
     color: #FFFFFF;
     padding: 0rem 0.5rem 4rem 2.5rem;
 `;

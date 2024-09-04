@@ -2,6 +2,8 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   padding: 20px;
+  width:40%;
+  margin: 0 auto;
 `;
 
 export const Message = styled.p`
@@ -41,7 +43,7 @@ export const VacancyEmail = styled.p`
 
 export const CandidateNeighborhood = styled.p`
   font-size: 16px;
-  color: #777;
+  color: #4169E1;
 `;
 
 export const ViewCandidatesButton = styled.button`

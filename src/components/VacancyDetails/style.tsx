@@ -161,8 +161,24 @@ export const RegisterButton = styled(Link)`
     }
     `;
 
+export const ModalButton = styled.button`
+    background-color: #4169E1; 
+    color: white;
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: #285e98; 
+    }
+`;
+
 export const WhatsappIcon = styled.img`
   width: 24px;
   margin-right: 10px;
   color: #565656;
 `;
+
