@@ -1,14 +1,25 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import App from './App';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import GlobalStyle from './globalStyles';
 
-ReactDOM.render(
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
+root.render(
   <React.StrictMode>
-    <GlobalStyle />
-    <App />
-  </React.StrictMode>,
-  
-  document.getElementById('root')
+
+    <HelmetProvider>
+
+      <Helmet>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" />
+      </Helmet>
+
+      <GlobalStyle />
+
+      <App />
+
+    </HelmetProvider>
+
+  </React.StrictMode>
 );

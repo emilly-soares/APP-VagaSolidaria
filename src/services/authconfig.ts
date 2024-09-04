@@ -35,19 +35,7 @@ export const isTokenExpired = (): boolean => {
   }
 };
 
-export const getRoleUser = (): string | undefined => {
 
-  const token = getToken();
-  if (!token) return undefined;
-
-  try {
-    const decoded: any = jwtDecode(token);
-    return decoded.role; 
-  } catch (err) {
-    console.log('Error decoding token:', err);
-    return undefined;
-  }
-};
 
 export const logout = (): void => {
   Cookies.remove(TOKEN_KEY);
