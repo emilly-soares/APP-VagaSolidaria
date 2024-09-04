@@ -45,21 +45,21 @@ const SubscribeButton = styled.button`
   }
 `;
 
-const EmailInputGroup = styled.div`
-width: 30%;
-display: flex;
-justify-content: center; 
-margin: 0 auto; 
-border: 1px solid #ccc; 
-border-radius: 20px; 
-padding: 0.5rem; 
-box-shadow: 0px 0px 5px #ccc; 
-margin-top: 2rem;
-margin-bottom: 10px;
-background-image: url(${emailIcon});
-background-repeat: no-repeat; 
-background-position: 10px center; 
-padding-left: 40px;
+  const EmailInputGroup = styled.div`
+  width: 30%;
+  display: flex;
+  justify-content: center; 
+  margin: 0 auto; 
+  border: 1px solid #ccc; 
+  border-radius: 20px; 
+  padding: 0.5rem; 
+  box-shadow: 0px 0px 5px #ccc; 
+  margin-top: 2rem;
+  margin-bottom: 10px;
+  background-image: url(${emailIcon});
+  background-repeat: no-repeat; 
+  background-position: 10px center; 
+  padding-left: 40px;
 `;
 
 const EmailInput = styled.input`
@@ -98,7 +98,7 @@ const Footer: React.FC = () => {
           <SubscribeButton>
             <IconWrapper>
               <SiMinutemailer size={20} />
-            </IconWrapper>
+            </IconWrapper >
             Inscrever
           </SubscribeButton>
 

@@ -3,7 +3,6 @@ import api from '../../services/api';
 import { useNavigate } from 'react-router-dom';
 import * as S from './style';
 import { FaSearch } from 'react-icons/fa'; 
-import Footer from '../Footer';
 
 export interface Company {
     id: number;
