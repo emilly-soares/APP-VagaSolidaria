@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import api from '../../services/api'; 
+import api from '../../services/api';
 import * as S from './style';
-import certificado from '../../assets/certificado.png'; 
+import certificado from '../../assets/certificado.png';
 
 const jsPDF = require('jspdf').jsPDF;
 
@@ -45,6 +45,7 @@ interface Vacancy {
     id: number;
     jobTitle: string;
     workload: string;
+    company_id: number;
 }
 
 const CandidatesList: React.FC = () => {
@@ -54,6 +55,7 @@ const CandidatesList: React.FC = () => {
     const [errorMessage, setErrorMessage] = useState<string>('');
     const [vacancyTitle, setVacancyTitle] = useState<string>('');
     const [workload, setWorkload] = useState<string>('');
+    const [companyName, setCompanyName] = useState<string>('');
 
     useEffect(() => {
         const loadVacancyDetails = async () => {
@@ -62,9 +64,13 @@ const CandidatesList: React.FC = () => {
                 const vacancyData: Vacancy = response.data;
                 setVacancyTitle(vacancyData.jobTitle);
                 setWorkload(vacancyData.workload);
+
+                const companyResponse = await api.get(`/find/company/${vacancyData.company_id}`);
+                const companyData = companyResponse.data;
+                setCompanyName(companyData.fantasyName);
             } catch (error) {
-                console.error('Erro ao carregar detalhes da vaga:', error);
-                setErrorMessage('Erro ao carregar detalhes da vaga.');
+                console.error('Erro ao carregar detalhes da vaga ou empresa:', error);
+                setErrorMessage('Erro ao carregar detalhes da vaga ou empresa.');
             }
         };
 
@@ -81,8 +87,6 @@ const CandidatesList: React.FC = () => {
 
                             const candidateResponse = await api.get(`/user-candidateFind/${userData.id}`);
                             const candidateData = candidateResponse.data;
-
-                            console.log('Dados do Candidato:', candidateData);
 
                             return { ...candidateData, user: userData, availability: candidate.availability };
                         } catch (error) {
@@ -107,24 +111,38 @@ const CandidatesList: React.FC = () => {
 
     const generateCertificate = (candidate: Candidate) => {
         const doc = new jsPDF('l', 'mm', 'a4');
-        
+
         const img = new Image();
-        img.src = certificado; 
+        img.src = certificado;
         img.onload = () => {
-            doc.setFillColor(247, 247, 247); 
+
+            doc.setFillColor(247, 247, 247);
             doc.rect(0, 0, doc.internal.pageSize.width, doc.internal.pageSize.height, 'F');
 
-            doc.addImage(img, 'PNG', 160, 10, 50, 50); 
+            doc.addImage(img, 'PNG', 200, 10, 70, 50);
 
             doc.setFontSize(28);
-            doc.text('Certificado de Conclusão de Trabalho Voluntário', 20, 80);
+            doc.setFont('helvetica', 'bold');
+            doc.text('CERTIFICADO DE CONCLUSÃO', doc.internal.pageSize.width / 2, 68, { align: 'center' });
+
             doc.setFontSize(22);
-            doc.text(`Certificamos que ${candidate.user?.name}`, 20, 100);
-            doc.text(`CPF: ${candidate.CPF}`, 20, 110);
-            doc.text(`Participou ativamente como ${vacancyTitle}`, 20, 120);
-            doc.text(`Com carga horária de ${workload}`, 20, 130);
-            doc.text(`Em ${getCurrentDate()}`, 20, 140);
-            doc.text(`Nova Andradina/MS`, 20, 150);
+            doc.setFont('helvetica', 'normal');
+            doc.text(`Certificamos que ${candidate.user?.name}`, doc.internal.pageSize.width / 2, 90, { align: 'center' });
+            doc.text(`CPF: ${candidate.CPF}`, doc.internal.pageSize.width / 2, 100, { align: 'center' });
+
+            doc.setFontSize(20);
+            doc.text(`Participou ativamente como voluntário na função de ${vacancyTitle}`, doc.internal.pageSize.width / 2, 115, { align: 'center' });
+            doc.text(`Com uma carga horária total de ${workload}`, doc.internal.pageSize.width / 2, 125, { align: 'center' });
+
+            doc.setFontSize(16);
+            doc.text('_____________________________________', doc.internal.pageSize.width / 2, 150, { align: 'center' });
+
+            doc.text(companyName, doc.internal.pageSize.width / 2, 165, { align: 'center' });
+
+            doc.text('Nova Andradina/MS', doc.internal.pageSize.width / 2, 175, { align: 'center' });
+
+            doc.setFontSize(14);
+            doc.text(`Emitido em ${getCurrentDate()}`, doc.internal.pageSize.width / 3, 200);
 
             doc.save(`certificado_${candidate.user?.name}.pdf`);
         };
@@ -133,6 +151,8 @@ const CandidatesList: React.FC = () => {
             console.error('Erro ao carregar a imagem.');
         };
     };
+
+
 
     return (
         <S.Container>
