@@ -62,21 +62,29 @@ export const CandidateNeighborhood = styled.p`
   color: #777;
 `;
 
-export const GenerateCertificateButton = styled.button`
-    background-color: #4169E1;
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
+export const GenerateCertificateButton = styled.button<{ disabled?: boolean }>`
+  background-color: ${({ disabled }) => (disabled ? '#B0C4DE' : '#4169E1')}; /* Cinza quando desabilitado */
+  border: none;
+  color: ${({ disabled }) => (disabled ? '#666' : 'white')}; /* Texto mais claro quando desabilitado */
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')}; /* Cursor não permitido se desabilitado */
+  border-radius: 4px;
+  transition: background-color 0.3s ease, color 0.3s ease;
 
-    &:hover {
-        background-color: #4169E1;;
-    }
+  &:hover {
+    background-color: ${({ disabled }) => (disabled ? '#B0C4DE' : '#1E90FF')}; /* Cor mais escura no hover se habilitado */
+  }
+
+  &:active {
+    transform: scale(0.98); /* Pequeno efeito de clique */
+  }
+
+  &:focus {
+    outline: none;
+  }
 `;

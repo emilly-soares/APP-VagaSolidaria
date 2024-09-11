@@ -56,6 +56,7 @@ const CandidatesList: React.FC = () => {
     const [vacancyTitle, setVacancyTitle] = useState<string>('');
     const [workload, setWorkload] = useState<string>('');
     const [companyName, setCompanyName] = useState<string>('');
+    const [generatedCertificates, setGeneratedCertificates] = useState<number[]>([]);
 
     useEffect(() => {
         const loadVacancyDetails = async () => {
@@ -64,7 +65,7 @@ const CandidatesList: React.FC = () => {
                 const vacancyData: Vacancy = response.data;
                 setVacancyTitle(vacancyData.jobTitle);
                 setWorkload(vacancyData.workload);
-
+    
                 const companyResponse = await api.get(`/find/company/${vacancyData.company_id}`);
                 const companyData = companyResponse.data;
                 setCompanyName(companyData.fantasyName);
@@ -80,22 +81,28 @@ const CandidatesList: React.FC = () => {
                 const candidatesData = response.data;
 
                 const candidatesWithUserDetails = await Promise.all(
-                    candidatesData.map(async (candidate: Candidate) => {
+                    candidatesData.map(async (candidateVacancy: any) => {
                         try {
-                            const userResponse = await api.get(`/candidate/userDetails/${candidate.candidateId}`);
+                            const userResponse = await api.get(`/candidate/userDetails/${candidateVacancy.candidateId}`);
                             const userData = userResponse.data;
-
+    
                             const candidateResponse = await api.get(`/user-candidateFind/${userData.id}`);
                             const candidateData = candidateResponse.data;
-
-                            return { ...candidateData, user: userData, availability: candidate.availability };
+    
+                            return { ...candidateData, user: userData, conclusion: candidateVacancy.conclusion, availability: candidateVacancy.availability };
                         } catch (error) {
-                            console.error(`Erro ao buscar usuário para candidato ${candidate.candidateId}:`, error);
-                            return candidate;
+                            console.error(`Erro ao buscar usuário para candidato ${candidateVacancy.candidateId}:`, error);
+                            return candidateVacancy;
                         }
                     })
                 );
-
+    
+                const generatedCertificateIds = candidatesWithUserDetails
+                    .filter((candidate) => !!candidate.conclusion)
+                    .map((candidate) => candidate.id);
+    
+                setGeneratedCertificates(generatedCertificateIds);
+    
                 setCandidates(candidatesWithUserDetails);
             } catch (error) {
                 console.error('Erro ao carregar candidatos:', error);
@@ -104,54 +111,65 @@ const CandidatesList: React.FC = () => {
                 setLoading(false);
             }
         };
-
+    
         loadVacancyDetails();
         loadCandidates();
     }, [vacancyId]);
 
-    const generateCertificate = (candidate: Candidate) => {
-        const doc = new jsPDF('l', 'mm', 'a4');
+    const generateCertificate = async (candidate: Candidate) => {
+        try {
+            const response = await api.post(`/generateCertificate/${candidate.id}/${vacancyId}`);
 
-        const img = new Image();
-        img.src = certificado;
-        img.onload = () => {
+            if (response.data.message === 'Certificado já foi gerado para este candidato.') {
+                alert('Certificado já foi gerado para este candidato.');
+                return;
+            }
 
-            doc.setFillColor(247, 247, 247);
-            doc.rect(0, 0, doc.internal.pageSize.width, doc.internal.pageSize.height, 'F');
+            const doc = new jsPDF('l', 'mm', 'a4');
+            const img = new Image();
+            img.src = certificado;
 
-            doc.addImage(img, 'PNG', 200, 10, 70, 50);
+            img.onload = () => {
+                doc.setFillColor(247, 247, 247);
+                doc.rect(0, 0, doc.internal.pageSize.width, doc.internal.pageSize.height, 'F');
 
-            doc.setFontSize(28);
-            doc.setFont('helvetica', 'bold');
-            doc.text('CERTIFICADO DE CONCLUSÃO', doc.internal.pageSize.width / 2, 68, { align: 'center' });
+                doc.addImage(img, 'PNG', 200, 10, 70, 50);
 
-            doc.setFontSize(22);
-            doc.setFont('helvetica', 'normal');
-            doc.text(`Certificamos que ${candidate.user?.name}`, doc.internal.pageSize.width / 2, 90, { align: 'center' });
-            doc.text(`CPF: ${candidate.CPF}`, doc.internal.pageSize.width / 2, 100, { align: 'center' });
+                doc.setFontSize(28);
+                doc.setFont('helvetica', 'bold');
+                doc.text('CERTIFICADO DE CONCLUSÃO', doc.internal.pageSize.width / 2, 68, { align: 'center' });
 
-            doc.setFontSize(20);
-            doc.text(`Participou ativamente como voluntário na função de ${vacancyTitle}`, doc.internal.pageSize.width / 2, 115, { align: 'center' });
-            doc.text(`Com uma carga horária total de ${workload}`, doc.internal.pageSize.width / 2, 125, { align: 'center' });
+                doc.setFontSize(22);
+                doc.setFont('helvetica', 'normal');
+                doc.text(`Certificamos que ${candidate.user?.name}`, doc.internal.pageSize.width / 2, 90, { align: 'center' });
+                doc.text(`CPF: ${candidate.CPF}`, doc.internal.pageSize.width / 2, 100, { align: 'center' });
 
-            doc.setFontSize(16);
-            doc.text('_____________________________________', doc.internal.pageSize.width / 2, 150, { align: 'center' });
+                doc.setFontSize(20);
+                doc.text(`Participou ativamente como voluntário na função de ${vacancyTitle}`, doc.internal.pageSize.width / 2, 115, { align: 'center' });
+                doc.text(`Com uma carga horária total de ${workload}`, doc.internal.pageSize.width / 2, 125, { align: 'center' });
 
-            doc.text(companyName, doc.internal.pageSize.width / 2, 165, { align: 'center' });
+                doc.setFontSize(16);
+                doc.text('_____________________________________', doc.internal.pageSize.width / 2, 150, { align: 'center' });
 
-            doc.text('Nova Andradina/MS', doc.internal.pageSize.width / 2, 175, { align: 'center' });
+                doc.text(companyName, doc.internal.pageSize.width / 2, 165, { align: 'center' });
+                doc.text('Nova Andradina/MS', doc.internal.pageSize.width / 2, 175, { align: 'center' });
 
-            doc.setFontSize(14);
-            doc.text(`Emitido em ${getCurrentDate()}`, doc.internal.pageSize.width / 3, 200);
+                doc.setFontSize(14);
+                doc.text(`Emitido em ${getCurrentDate()}`, doc.internal.pageSize.width / 3, 200);
 
-            doc.save(`certificado_${candidate.user?.name}.pdf`);
-        };
+                doc.save(`certificado_${candidate.user?.name}.pdf`);
 
-        img.onerror = () => {
-            console.error('Erro ao carregar a imagem.');
-        };
+                setGeneratedCertificates((prev) => [...prev, candidate.id]);
+            };
+
+            img.onerror = () => {
+                console.error('Erro ao carregar a imagem.');
+            };
+        } catch (error) {
+            console.error('Erro ao gerar certificado:', error);
+            alert('Erro ao gerar certificado.');
+        }
     };
-
 
 
     return (
@@ -195,14 +213,22 @@ const CandidatesList: React.FC = () => {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
-                                    Enviar mensagem
+                                    {candidate.phone}
                                 </S.WhatsappLink>
                             </S.CandidateInfo>
                             <S.GenerateCertificateButton
                                 onClick={() => generateCertificate(candidate)}
+                                disabled={generatedCertificates.includes(candidate.id)}
+                                style={{
+                                    backgroundColor: generatedCertificates.includes(candidate.id) ? 'gray' : '',
+                                    cursor: generatedCertificates.includes(candidate.id) ? 'not-allowed' : 'pointer',
+                                }}
                             >
-                                Concluir e Gerar Certificado
+                                {generatedCertificates.includes(candidate.id)
+                                    ? 'Certificado Gerado'
+                                    : 'Gerar Certificado'}
                             </S.GenerateCertificateButton>
+
                         </S.CandidateCard>
                     ))}
                 </S.CandidatesList>
