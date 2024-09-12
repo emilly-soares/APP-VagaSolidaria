@@ -7,6 +7,8 @@ import whatsapp from '../../assets/whatsapp.png';
 import map from '../../assets/map.svg';
 import { getUserId } from '../../services/authconfig';
 import Modal from 'react-modal';
+import { toast } from 'react-toastify';
+import axios, { AxiosError } from 'axios';
 
 export interface Vacancy {
     id: number;
@@ -32,7 +34,7 @@ export interface Company {
 }
 
 const VacancyDetails: React.FC = () => {
-    
+
     const userId = Number(getUserId());
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
@@ -41,7 +43,7 @@ const VacancyDetails: React.FC = () => {
     const [company, setCompany] = useState<Company | null>(null);
     const [availability, setAvailability] = useState<string>('');
     const [candidateId, setCandidateId] = useState<number | null>(null);
-    
+
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
     useEffect(() => {
@@ -83,12 +85,28 @@ const VacancyDetails: React.FC = () => {
                     candidateId,
                     availability,
                 });
-                console.log('Candidatura enviada com sucesso!', response.data);
+
+                if (response.status === 201) {
+                    console.log('Candidatura enviada com sucesso!', response.data);
+                    toast.success('Candidatura enviada com sucesso!');
+                } else if (response.status === 400 && response.data.message) {
+                    console.log('Candidatura recusada:', response.data.message);
+                    toast.error(response.data.message);
+                } else {
+                    toast.error('Erro ao enviar candidatura.');
+                }
             } else {
-                console.error('A vaga ou ID do candidato está nulo. Não é possível enviar a candidatura.');
+                toast.error('Erro ao enviar candidatura.');
             }
-        } catch (error) {
+        } catch (err) {
+            const error = err as AxiosError;
             console.error('Erro ao enviar candidatura:', error);
+
+            if (error.response && error.response.data && (error.response.data as { message: string }).message) {
+                toast.error((error.response.data as { message: string }).message);
+            } else {
+                toast.error('Erro ao enviar candidatura.');
+            }
         }
     };
 
