@@ -28,12 +28,15 @@ const ManageVacanciesForm: React.FC = () => {
     const [responsibilities, setResponsibilities] = useState('');
 
 
+
     const [error, setError] = useState<string>('');
 
     const loadVacancies = async () => {
         try {
-            const response = await api.get('/vacancies');
-            setVacancies(response.data);
+            if (companyId) {
+                const response = await api.get(`/vacancies/company/${companyId}`);
+                setVacancies(response.data);
+            }
         } catch (error) {
             console.error('Erro ao carregar vagas:', error);
         }
@@ -45,7 +48,6 @@ const ManageVacanciesForm: React.FC = () => {
             const response = await api.get(`/company/${userId}`);
             if (response.data && response.data.id) {
                 setCompanyId(response.data.id);
-                console.log(companyId);
             } else {
                 console.error('Empresa não encontrada para o usuário:', userId);
                 setError('Empresa não encontrada para o usuário');
@@ -57,9 +59,14 @@ const ManageVacanciesForm: React.FC = () => {
     };
 
     useEffect(() => {
-        loadVacancies();
         loadCompanyByUserId();
     }, []);
+
+    useEffect(() => {
+        if (companyId) {
+            loadVacancies();
+        }
+    }, [companyId]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -142,7 +149,7 @@ const ManageVacanciesForm: React.FC = () => {
                         name="responsibilities"
                         value={responsibilities}
                         onChange={(e) => setResponsibilities(e.target.value)}
-                        placeholder="Responsabilidades (ex.: - Planejar e preparar atividades recreativas / Interagir e engajar/ Colaborar com outros voluntários)"
+                        placeholder="Responsabilidades"
                         required
                     />
                     {error && <S.Error>{error}</S.Error>}
@@ -161,7 +168,7 @@ const ManageVacanciesForm: React.FC = () => {
                                 <S.TableHeader>Ações</S.TableHeader>
                             </tr>
                         </thead>
-
+                        
                         <S.VacancyTableBody>
                             {vacancies.map((vacancy: Vacancy, index: number) => (
                                 <S.TableRow key={vacancy.id} style={{ backgroundColor: index % 2 === 0 ? '#f4f4f4' : 'white' }}>

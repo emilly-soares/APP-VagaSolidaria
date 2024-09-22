@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom'; 
 import { logout, isAuthenticated, getUserId } from '../../services/authconfig';
 import api from '../../services/api';
 import logoImg from '../../assets/logo.png';
 import circle from "../../assets/vacancyCircle.png";
 import * as S from './style';
 
-export  const Navbar: React.FC = () =>{
-
+export const Navbar: React.FC = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [userName, setUserName] = useState('');
     const [userRole, setUserRole] = useState('');
     const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
+
+    const navigate = useNavigate();
 
     const toggleSubmenu = () => {
         setIsSubmenuOpen(!isSubmenuOpen);
@@ -41,6 +43,7 @@ export  const Navbar: React.FC = () =>{
         setUserName('');
         setUserRole('');
         setIsSubmenuOpen(false);
+        navigate('/'); 
     };
 
     return (
@@ -92,7 +95,6 @@ export  const Navbar: React.FC = () =>{
             </S.NavbarButtons>
         </S.ContainerNavbar>
 
-
     );
 };
 
@@ -104,11 +106,9 @@ export const Menu: React.FC = () => {
             </S.LeftSection>
 
             <S.RightSection>
-                <S.imgCircle src={circle} alt="encontre uma vaga"/>
+                <S.imgCircle src={circle} alt="encontre uma vaga" />
             </S.RightSection>
         </S.ContainerMenu>
-
-    )
+        
+    );
 };
-
-
