@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import * as S from './style';
 import { getUserId } from '../../services/authconfig';
 import api from '../../services/api';
+import { toast } from 'react-toastify';
 
 export interface Candidate {
     id: number;
@@ -39,7 +40,6 @@ const CandidateForm: React.FC = () => {
     });
 
     const [isNewCandidate, setIsNewCandidate] = useState(true);
-    const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
     useEffect(() => {
         async function fetchData() {
@@ -47,18 +47,15 @@ const CandidateForm: React.FC = () => {
                 const responseUser = await api.get(`/user/${userId}`);
                 setUser(responseUser.data);
 
-                const responseCandidate = await api.get(`/candidateFind/${userId}`);
+                const responseCandidate = await api.get(`/user-candidateFind/${userId}`);
                 if (responseCandidate.data) {
-
                     const candidateData = {
                         ...responseCandidate.data,
                         dateBirth: responseCandidate.data.dateBirth ? new Date(responseCandidate.data.dateBirth).toISOString().split('T')[0] : ''
                     };
-
                     setCandidate(candidateData);
                     setIsNewCandidate(false);
                 }
-
             } catch (error) {
                 console.error('Erro ao obter candidato ou usuário:', error);
             }
@@ -66,31 +63,23 @@ const CandidateForm: React.FC = () => {
         fetchData();
     }, [userId]);
 
-
     const handleUserChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-
         const { name, value } = e.target;
         setUser(prevState => ({
             ...prevState,
             [name]: value
         }));
-
     };
 
-
     const handleCandidateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-
         const { name, value } = e.target;
         setCandidate(prevState => ({
             ...prevState,
             [name]: value
         }));
-
     };
 
-
     const handleSubmit = async (e: React.FormEvent) => {
-
         e.preventDefault();
 
         try {
@@ -100,21 +89,17 @@ const CandidateForm: React.FC = () => {
             } else {
                 await api.put(`/candidate/${userId}`, candidate);
             }
-            setSuccessMessage('Dados cadastrados/alterados com sucesso!');
-
+            toast.success('Dados cadastrados/alterados com sucesso!');
         } catch (error) {
             console.error('Erro ao alterar dados:', error);
+            toast.error('Erro ao salvar os dados, tente novamente.');
         }
-
     };
-
 
     return (
         <>
             <S.Container>
-
                 <S.FormContainer onSubmit={handleSubmit}>
-
                     <S.Label htmlFor="email">E-mail:</S.Label>
                     <S.InputField
                         type="email"
@@ -195,11 +180,7 @@ const CandidateForm: React.FC = () => {
                     />
 
                     <S.SubmitButton type="submit">Salvar</S.SubmitButton>
-
                 </S.FormContainer>
-
-                {successMessage && <S.SuccessMessage>{successMessage}</S.SuccessMessage>}
-
             </S.Container>
         </>
     );

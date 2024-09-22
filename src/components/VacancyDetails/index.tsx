@@ -8,7 +8,7 @@ import map from '../../assets/map.svg';
 import { getUserId } from '../../services/authconfig';
 import Modal from 'react-modal';
 import { toast } from 'react-toastify';
-import axios, { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
 
 export interface Vacancy {
     id: number;
