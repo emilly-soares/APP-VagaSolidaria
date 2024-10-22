@@ -113,7 +113,8 @@ Aqui estão as principais telas da aplicação, organizadas por seções:
 - **Gerenciamento de Empresas**  
   Empresas podem gerenciar suas vagas e informações.
 
-  ![Tela de Gerenciamento de Empresas](https://link-da-imagem-empresas.com)
+![image15](https://github.com/user-attachments/assets/06bc6b15-653f-4f50-839f-845ea21bc367)
+
 
 ### 5. **Outras Telas**
 
